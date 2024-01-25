@@ -14,7 +14,7 @@
 <meta property="og:description" content="题目链接：https:&#x2F;&#x2F;codeforces.com&#x2F;contest&#x2F;1922&#x2F;problem&#x2F;C （感觉已经是不少次遇到类似思路的题目了） 这道题企图每次query都从头开始算轻轻松松就tle啦！毕竟考虑最坏的情况，O(mn)甚至已经1e11啦。  tip:pink大人说时间复杂度最大到3e8就tle啦！  所以题目思路会优先把每个点到初始点花费的coins数目算出来，然后每次query的时候">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-25T05:32:46.000Z">
-<meta property="article:modified_time" content="2024-01-25T05:47:58.252Z">
+<meta property="article:modified_time" content="2024-01-25T07:47:31.928Z">
 <meta property="article:author" content="YXF">
 <meta property="article:tag" content="Educational Codeforces Round 161 (Rated for Div. 2)">
 <meta name="twitter:card" content="summary">
@@ -23,15 +23,15 @@
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1706165892297">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1706169408096">
 
-<link rel="stylesheet" href="/css/style.css?v=1706165892297">
+<link rel="stylesheet" href="/css/style.css?v=1706169408096">
 
 
 
 
     
-        <link rel="stylesheet" href="/custom.css?v=1706165892297">
+        <link rel="stylesheet" href="/custom.css?v=1706169408096">
     
 
 
@@ -41,7 +41,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1706165892297"></script>
+<script async src="/js/app.js?v=1706169408096"></script>
 
  
 
@@ -172,14 +172,13 @@
 <blockquote>
 <p><strong>tips</strong>:</p>
 <ol>
-<li>用0x3f3f3f3f表示无穷大，0x3f3f3f3f &#x3D; 1061109567.</li>
-<li>用0xc0c0c0c0表示无穷小，0xc0c0c0c0 &#x3D; -1061109568.</li>
+<li>用0x3f3f3f3f表示无穷大，0x3f3f3f3f = 1061109567.</li>
+<li>用0xc0c0c0c0表示负无穷大，0xc0c0c0c0 = -1061109568.</li>
 </ol>
 <p>当然，如果只用于一般的比较，0xfffffff也可能是一个不错的选择。</p>
 </blockquote>
 <p>题解代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> m, n, a[<span class="number">100010</span>];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">distance</span><span class="params">(ll d[], ll md[])</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> i;</span><br><span class="line">	d[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">	md[n] = <span class="number">0</span>;</span><br><span class="line">	d[<span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line">	md[n - <span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">2</span>; i &lt; n; i++)&#123;</span><br><span class="line">		ll d1 = a[i] - a[i - <span class="number">1</span>];</span><br><span class="line">		ll d2 = a[i + <span class="number">1</span>] - a[i];</span><br><span class="line">		<span class="keyword">if</span>(d1 &lt; d2) d[i + <span class="number">1</span>] = d[i] + d2;</span><br><span class="line">		<span class="keyword">else</span> d[i + <span class="number">1</span>] = d[i] + <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i = n - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--)&#123;</span><br><span class="line">		ll d1 = a[i] - a[i - <span class="number">1</span>];</span><br><span class="line">		ll d2 = a[i + <span class="number">1</span>] - a[i];</span><br><span class="line">		<span class="keyword">if</span>(d1 &lt; d2) md[i - <span class="number">1</span>] = md[i] + <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span> md[i - <span class="number">1</span>] = md[i] + d1;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> t, i;</span><br><span class="line">	ll d[<span class="number">100010</span>], md[<span class="number">100010</span>];</span><br><span class="line">	cin&gt;&gt;t;</span><br><span class="line">	<span class="keyword">while</span>(t--)&#123;</span><br><span class="line">		cin&gt;&gt;n;</span><br><span class="line">		<span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">			cin&gt;&gt;a[i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">distance</span>(d, md);</span><br><span class="line">		cin&gt;&gt;m;</span><br><span class="line">		<span class="keyword">for</span>(i = <span class="number">0</span>; i &lt;m; i++)&#123;</span><br><span class="line">			<span class="type">int</span> a, b;</span><br><span class="line">			cin&gt;&gt;a&gt;&gt;b;</span><br><span class="line">			<span class="keyword">if</span>(a &gt; b) cout&lt;&lt; md[b] - md[a] &lt;&lt;endl;</span><br><span class="line">			<span class="keyword">else</span> cout &lt;&lt; d[b] - d[a] &lt;&lt; endl;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> ll long long</span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">int</span> m, n, a[<span class="hljs-number">100010</span>];<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">distance</span><span class="hljs-params">(ll d[], ll md[])</span></span>&#123;<br>	<span class="hljs-type">int</span> i;<br>	d[<span class="hljs-number">1</span>] = <span class="hljs-number">0</span>;<br>	md[n] = <span class="hljs-number">0</span>;<br>	d[<span class="hljs-number">2</span>] = <span class="hljs-number">1</span>;<br>	md[n - <span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">for</span>(i = <span class="hljs-number">2</span>; i &lt; n; i++)&#123;<br>		ll d1 = a[i] - a[i - <span class="hljs-number">1</span>];<br>		ll d2 = a[i + <span class="hljs-number">1</span>] - a[i];<br>		<span class="hljs-keyword">if</span>(d1 &lt; d2) d[i + <span class="hljs-number">1</span>] = d[i] + d2;<br>		<span class="hljs-keyword">else</span> d[i + <span class="hljs-number">1</span>] = d[i] + <span class="hljs-number">1</span>;<br>	&#125;<br>	<span class="hljs-keyword">for</span>(i = n - <span class="hljs-number">1</span>; i &gt; <span class="hljs-number">0</span>; i--)&#123;<br>		ll d1 = a[i] - a[i - <span class="hljs-number">1</span>];<br>		ll d2 = a[i + <span class="hljs-number">1</span>] - a[i];<br>		<span class="hljs-keyword">if</span>(d1 &lt; d2) md[i - <span class="hljs-number">1</span>] = md[i] + <span class="hljs-number">1</span>;<br>		<span class="hljs-keyword">else</span> md[i - <span class="hljs-number">1</span>] = md[i] + d1;<br>	&#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-type">int</span> t, i;<br>	ll d[<span class="hljs-number">100010</span>], md[<span class="hljs-number">100010</span>];<br>	cin&gt;&gt;t;<br>	<span class="hljs-keyword">while</span>(t--)&#123;<br>		cin&gt;&gt;n;<br>		<span class="hljs-keyword">for</span>(i = <span class="hljs-number">1</span>; i &lt;= n; i++)&#123;<br>			cin&gt;&gt;a[i];<br>		&#125;<br>		<span class="hljs-built_in">distance</span>(d, md);<br>		cin&gt;&gt;m;<br>		<span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>; i &lt;m; i++)&#123;<br>			<span class="hljs-type">int</span> a, b;<br>			cin&gt;&gt;a&gt;&gt;b;<br>			<span class="hljs-keyword">if</span>(a &gt; b) cout&lt;&lt; md[b] - md[a] &lt;&lt;endl;<br>			<span class="hljs-keyword">else</span> cout &lt;&lt; d[b] - d[a] &lt;&lt; endl;<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
     <p>今天大概也在努力吧~o(*￣▽￣*)ブ</p>
 
@@ -207,7 +206,7 @@
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1706165892285"></script>
+    <script async src="/js/copy-codeblock.js?v=1706169408078"></script>
   
 
   

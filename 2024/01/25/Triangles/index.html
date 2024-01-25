@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-<meta name="description" content="ovo被督促好好写题解了呜呜 题目链接：https:&#x2F;&#x2F;codeforces.com&#x2F;contest&#x2F;1922&#x2F;problem&#x2F;B 解题的关键在于：The length of the i-th stick is 2^ai^ , 即第i根棍子的长度为2的ai次方（不仔细审题的话就会寄掉！） 然后就转换为数学题了，而且是2的次方问题就简单了很多，单独对其可能的情况进行分析，其实只有下面两种情况：  三">
+<meta name="description" content="ovo被督促好好写题解了呜呜 题目链接：https:&#x2F;&#x2F;codeforces.com&#x2F;contest&#x2F;1922&#x2F;problem&#x2F;B 解题的关键在于：The length of the i-th stick is 2ai , 即第i根棍子的长度为2的ai次方（不仔细审题的话就会寄掉！） 然后就转换为数学题了，而且是2的次方问题就简单了很多，单独对其可能的情况进行分析，其实只有下面两种情况：  三条边">
 <meta property="og:type" content="article">
 <meta property="og:title" content="B. Forming Triangles">
 <meta property="og:url" content="https://yxf203.github.io/2024/01/25/Triangles/index.html">
 <meta property="og:site_name" content="fff从零开始的博客OvO">
-<meta property="og:description" content="ovo被督促好好写题解了呜呜 题目链接：https:&#x2F;&#x2F;codeforces.com&#x2F;contest&#x2F;1922&#x2F;problem&#x2F;B 解题的关键在于：The length of the i-th stick is 2^ai^ , 即第i根棍子的长度为2的ai次方（不仔细审题的话就会寄掉！） 然后就转换为数学题了，而且是2的次方问题就简单了很多，单独对其可能的情况进行分析，其实只有下面两种情况：  三">
+<meta property="og:description" content="ovo被督促好好写题解了呜呜 题目链接：https:&#x2F;&#x2F;codeforces.com&#x2F;contest&#x2F;1922&#x2F;problem&#x2F;B 解题的关键在于：The length of the i-th stick is 2ai , 即第i根棍子的长度为2的ai次方（不仔细审题的话就会寄掉！） 然后就转换为数学题了，而且是2的次方问题就简单了很多，单独对其可能的情况进行分析，其实只有下面两种情况：  三条边">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-25T04:52:31.000Z">
-<meta property="article:modified_time" content="2024-01-25T05:29:15.534Z">
+<meta property="article:modified_time" content="2024-01-25T07:47:36.872Z">
 <meta property="article:author" content="YXF">
 <meta property="article:tag" content="Educational Codeforces Round 161 (Rated for Div. 2)">
 <meta name="twitter:card" content="summary">
@@ -23,15 +23,15 @@
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1706165892302">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1706169408090">
 
-<link rel="stylesheet" href="/css/style.css?v=1706165892302">
+<link rel="stylesheet" href="/css/style.css?v=1706169408090">
 
 
 
 
     
-        <link rel="stylesheet" href="/custom.css?v=1706165892302">
+        <link rel="stylesheet" href="/custom.css?v=1706169408090">
     
 
 
@@ -41,7 +41,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1706165892303"></script>
+<script async src="/js/app.js?v=1706169408090"></script>
 
  
 
@@ -161,28 +161,29 @@
 
     <p>ovo被督促好好写题解了呜呜</p>
 <p>题目链接：<a target="_blank" rel="noopener" href="https://codeforces.com/contest/1922/problem/B">https://codeforces.com/contest/1922/problem/B</a></p>
-<p>解题的关键在于：The length of the i-th stick is 2^ai^ , 即第i根棍子的长度为2的ai次方（不仔细审题的话就会寄掉！）</p>
+<p>解题的关键在于：The length of the i-th stick is 2<sup>ai</sup> , 即第i根棍子的长度为2的ai次方（不仔细审题的话就会寄掉！）</p>
 <p>然后就转换为数学题了，而且是2的次方问题就简单了很多，单独对其可能的情况进行分析，其实只有下面两种情况：</p>
 <ol>
 <li>三条边相同（等边）。</li>
 <li>两条长边相同，短边只要比长边短即可（等腰）。</li>
 </ol>
-<p>（注：这个数学合理性也很容易想出来，假设短的两边分别为2^i^, 2^j^,i&lt;&#x3D;j,那么2^i^+2^j^&lt;&#x3D;2^j+1^是显然的，因此剩下的最长边也只能为j。）</p>
+<p>（注：这个数学合理性也很容易想出来，假设短的两边分别为2<sup>i</sup>, 2<sup>j</sup>,i&lt;=j,那么2<sup>i</sup>+2<sup>j</sup>&lt;=2<sup>j+1</sup>是显然的，因此剩下的最长边也只能为j。）</p>
 <p>这样子解题思路也比较明了啦，只要通过以下两步即可完成：</p>
-<p>1.利用桶的思想统计每个a^i^总共的数量。</p>
+<p>1.利用桶的思想统计每个a<sup>i</sup>总共的数量。</p>
 <p>2.利用排列组合的方式进行计算。</p>
 <p>下面记录一下弱小可怜无助的本人的错误点：</p>
 <blockquote>
 <ol>
-<li><p>因为觉得memset特别好用所以每次都拿来初始化，然后O(300010*3*t)直接TLE了。</p>
+<li>
+<p>因为觉得memset特别好用所以每次都拿来初始化，然后O(300010*3*t)直接TLE了。</p>
 </li>
-<li><p>一没读到第i根棍子的长度为2的ai次方，二没读到a<del>i</del>的范围还包括0，寄的明明白白一清二楚。</p>
+<li>
+<p>一没读到第i根棍子的长度为2的ai次方，二没读到a<sub>i</sub>的范围还包括0，寄的明明白白一清二楚。</p>
 </li>
 </ol>
 </blockquote>
 <p>AC代码：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> a[<span class="number">300010</span>], b[<span class="number">300010</span>];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> m,n, num;</span><br><span class="line">	<span class="type">long</span> <span class="type">long</span> t;</span><br><span class="line">	<span class="type">long</span> <span class="type">long</span> sum;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;m);</span><br><span class="line">	<span class="keyword">while</span>(m--)&#123;</span><br><span class="line">		sum = <span class="number">0</span>;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">		num = <span class="number">0</span>;</span><br><span class="line"><span class="comment">//		memset(b, 0, sizeof(b));</span></span><br><span class="line"><span class="comment">//		memset(c, 0, sizeof(c));</span></span><br><span class="line"><span class="comment">//		memset(num, 0, sizeof(num));</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">			b[a[i]]++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt;= n; i++)&#123;</span><br><span class="line"><span class="comment">//			num[i] = num[i - 1] + b[i];	</span></span><br><span class="line">			t = (<span class="type">long</span> <span class="type">long</span>)b[i];</span><br><span class="line">			<span class="keyword">if</span>(t &gt;= <span class="number">3</span>) &#123;</span><br><span class="line">				sum += t * (t - <span class="number">1</span>) * (t - <span class="number">2</span>) / <span class="number">6</span>;</span><br><span class="line">			&#125; </span><br><span class="line">			<span class="keyword">if</span>(t &gt;= <span class="number">2</span>) &#123;</span><br><span class="line">				sum += t * (t - <span class="number">1</span>) / <span class="number">2</span> * num;</span><br><span class="line">			&#125;</span><br><span class="line">			num += b[i];</span><br><span class="line">			b[i] = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, sum);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">int</span> a[<span class="hljs-number">300010</span>], b[<span class="hljs-number">300010</span>];<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-type">int</span> m,n, num;<br>	<span class="hljs-type">long</span> <span class="hljs-type">long</span> t;<br>	<span class="hljs-type">long</span> <span class="hljs-type">long</span> sum;<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;m);<br>	<span class="hljs-keyword">while</span>(m--)&#123;<br>		sum = <span class="hljs-number">0</span>;<br>		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;n);<br>		num = <span class="hljs-number">0</span>;<br><span class="hljs-comment">//		memset(b, 0, sizeof(b));</span><br><span class="hljs-comment">//		memset(c, 0, sizeof(c));</span><br><span class="hljs-comment">//		memset(num, 0, sizeof(num));</span><br>		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)&#123;<br>			<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;a[i]);<br>			b[a[i]]++;<br>		&#125;<br>		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt;= n; i++)&#123;<br><span class="hljs-comment">//			num[i] = num[i - 1] + b[i];	</span><br>			t = (<span class="hljs-type">long</span> <span class="hljs-type">long</span>)b[i];<br>			<span class="hljs-keyword">if</span>(t &gt;= <span class="hljs-number">3</span>) &#123;<br>				sum += t * (t - <span class="hljs-number">1</span>) * (t - <span class="hljs-number">2</span>) / <span class="hljs-number">6</span>;<br>			&#125; <br>			<span class="hljs-keyword">if</span>(t &gt;= <span class="hljs-number">2</span>) &#123;<br>				sum += t * (t - <span class="hljs-number">1</span>) / <span class="hljs-number">2</span> * num;<br>			&#125;<br>			num += b[i];<br>			b[i] = <span class="hljs-number">0</span>;<br>		&#125;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>, sum);<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
     <p>今天大概也在努力吧~o(*￣▽￣*)ブ</p>
 
@@ -210,7 +211,7 @@
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1706165892285"></script>
+    <script async src="/js/copy-codeblock.js?v=1706169408077"></script>
   
 
   
