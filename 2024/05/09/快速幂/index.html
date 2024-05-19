@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="zh"><head>
+<title>快速幂 - fff从零开始的博客OvO</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta name="description" content="o(￣▽￣)ブ已经好久没有学习算法啦 尽管 尽管还有两个星期就要去省赛了（沮丧沮丧 最近好忙好忙 好叭 言归正传 今天ff将要进入快速幂小课堂！ovo  快速幂  定义 快速幂，二进制取幂，是一个在O（logn）的时间内计算an的小技巧（好快！），而暴力的计算需要O（n）的时间（qs，已经看到231然后一算O（n）就能感觉寄了.）  想法 二进制取幂（yysy，听起来好高级）：将幂的任务按照指数的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="快速幂">
+<meta property="og:url" content="https://yxf203.github.io/2024/05/09/%E5%BF%AB%E9%80%9F%E5%B9%82/index.html">
+<meta property="og:site_name" content="fff从零开始的博客OvO">
+<meta property="og:description" content="o(￣▽￣)ブ已经好久没有学习算法啦 尽管 尽管还有两个星期就要去省赛了（沮丧沮丧 最近好忙好忙 好叭 言归正传 今天ff将要进入快速幂小课堂！ovo  快速幂  定义 快速幂，二进制取幂，是一个在O（logn）的时间内计算an的小技巧（好快！），而暴力的计算需要O（n）的时间（qs，已经看到231然后一算O（n）就能感觉寄了.）  想法 二进制取幂（yysy，听起来好高级）：将幂的任务按照指数的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-09T13:58:13.000Z">
+<meta property="article:modified_time" content="2024-05-19T05:53:14.556Z">
+<meta property="article:author" content="YXF">
+<meta property="article:tag" content="-快速幂">
+<meta name="twitter:card" content="summary">
+
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1716098223432">
+
+<link rel="stylesheet" href="/css/style.css?v=1716098223432">
+
+
+
+
+    
+        <link rel="stylesheet" href="/custom.css?v=1716098223432">
+    
+
+
+
+<script src="/lib/mdui_043tiny/mdui.js" async></script>
+<script src="/lib/fancybox/fancybox.umd.js" async></script>
+<script src="/lib/lax.min.js" async></script>
+
+
+<script async src="/js/app.js?v=1716098223432"></script>
+
+ 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4D4ZJ9G024"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+
+  gtag("config", "G-4D4ZJ9G024");
+</script>
+
+
+<link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+<meta name="generator" content="Hexo 6.3.0"></head><body class="nexmoe mdui-drawer-body-left"><div id="nexmoe-background"><div class="nexmoe-bg" style="background-image: url(/../../images/bcg.png)"></div><div class="mdui-appbar mdui-shadow-0"><div class="mdui-toolbar"><a class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target: &#039;#drawer&#039;, swipe: true}" title="menu"><i class="mdui-icon nexmoefont icon-menu"></i></a><div class="mdui-toolbar-spacer"></div><a class="mdui-btn mdui-btn-icon" href="/" title="YXF"><img src="/../../images/avatar.jpg" alt="YXF"></a></div></div></div><div id="nexmoe-header"><div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="YXF">
+            <img src="/../../images/avatar.jpg" alt="YXF" alt="YXF">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>5</div>
+        <div><span>标签</span>3</div>
+        <div><span>分类</span>2</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+    </div>
+    
+    
+        
+        
+        
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/05/09/%E5%BF%AB%E9%80%9F%E5%B9%82/">快速幂</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/07/ff%E7%9A%84%E7%A2%8E%E7%A2%8E%E5%BF%B5/">2024.3.7的碎碎念启动！</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/25/Cities/">C. Closest Cities</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/25/Triangles/">B. Forming Triangles</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/06/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+   
+    <div class="nexmoe-copyright">
+        &copy; 2024 YXF
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer --></div><div id="nexmoe-content"><div class="nexmoe-primary"><div class="nexmoe-post">
+  <article>
+    
+        <div class="nexmoe-post-cover"> 
+            <img src="/../../images/bcg.png" alt="快速幂" loading="lazy">
+            <h1>快速幂</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2024年05月09日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+        
+        
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+    <p>o(<em>￣▽￣</em>)ブ已经好久没有学习算法啦<br />
+尽管 尽管还有两个星期就要去省赛了（沮丧沮丧<br />
+最近好忙好忙<br />
+好叭 言归正传<br />
+今天ff将要进入快速幂小课堂！ovo</p>
+<h3 id="快速幂"><a class="markdownIt-Anchor" href="#快速幂"></a> 快速幂</h3>
+<h4 id="定义"><a class="markdownIt-Anchor" href="#定义"></a> 定义</h4>
+<p>快速幂，二进制取幂，是一个在<code>O（logn）</code>的时间内计算a<sup>n</sup>的小技巧（好快！），而暴力的计算需要<code>O（n）</code>的时间（qs，已经看到2<sup>31</sup>然后一算<code>O（n）</code>就能感觉寄了.）</p>
+<h4 id="想法"><a class="markdownIt-Anchor" href="#想法"></a> 想法</h4>
+<p><strong>二进制取幂</strong>（yysy，听起来好高级）：将幂的任务按照指数的<strong>二进制表示</strong>来分割成更小的任务。</p>
+<h4 id="ff理解的"><a class="markdownIt-Anchor" href="#ff理解的"></a> ff理解的！</h4>
+<p>ff理解的思路大概就是这样：a<sup>b</sup>次方，我们通过<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msup><mi>a</mi><mn>2</mn></msup><msup><mo stretchy="false">)</mo><mfrac><mi>b</mi><mn>2</mn></mfrac></msup></mrow><annotation encoding="application/x-tex">(a^2)^{\frac{b}{2}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.22902em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.97902em;"><span style="top:-3.363em;margin-right:0.05em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mopen nulldelimiter sizing reset-size3 size6"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8800285714285714em;"><span style="top:-2.656em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.2255000000000003em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line mtight" style="border-bottom-width:0.049em;"></span></span><span style="top:-3.384em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">b</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.344em;"><span></span></span></span></span></span><span class="mclose nulldelimiter sizing reset-size3 size6"></span></span></span></span></span></span></span></span></span></span></span></span></span> 不断缩小b，从而减少运算时间，而<code>O（logn）</code>也是从这个b缩小的过程来的！（骄傲）</p>
+<p>然后呢，就是分为奇数和偶数情况，</p>
+<p>奇数的时候就–，偶数的话就<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msup><mi>a</mi><mn>2</mn></msup><msup><mo stretchy="false">)</mo><mfrac><mi>b</mi><mn>2</mn></mfrac></msup></mrow><annotation encoding="application/x-tex">(a^2)^{\frac{b}{2}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.22902em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.97902em;"><span style="top:-3.363em;margin-right:0.05em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mopen nulldelimiter sizing reset-size3 size6"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8800285714285714em;"><span style="top:-2.656em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.2255000000000003em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line mtight" style="border-bottom-width:0.049em;"></span></span><span style="top:-3.384em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">b</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.344em;"><span></span></span></span></span></span><span class="mclose nulldelimiter sizing reset-size3 size6"></span></span></span></span></span></span></span></span></span></span></span></span></span>这样处理！然后不断迭代！</p>
+<h4 id="ff的代码"><a class="markdownIt-Anchor" href="#ff的代码"></a> ff的代码</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">long</span> <span class="hljs-type">long</span> <span class="hljs-title">fastmi</span><span class="hljs-params">(<span class="hljs-type">long</span> <span class="hljs-type">long</span> a, <span class="hljs-type">long</span> <span class="hljs-type">long</span> b, <span class="hljs-type">long</span> <span class="hljs-type">long</span> p)</span></span>&#123;<br>	<span class="hljs-type">long</span> <span class="hljs-type">long</span> ans = <span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">while</span>(b &gt; <span class="hljs-number">0</span>)&#123;<br>		<span class="hljs-keyword">if</span>(b &amp; <span class="hljs-number">1</span> == <span class="hljs-number">1</span>) &#123;<br>			ans = ans * a % p;<br>			b--;<br>		&#125; <span class="hljs-keyword">else</span> &#123;<br>			a = a * a % p;<br>			b &gt;&gt;= <span class="hljs-number">1</span>;<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">return</span> ans;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>(ovo当然啦，ff的代码肯定是还可以再简化的，但是为了便于ff自己理解，还是直接放自己的代码好惹！)</p>
+
+    <p>今天大概也在努力吧~o(*￣▽￣*)ブ</p>
+
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>YXF<br>
+        <strong>本文链接：</strong><a href="https://yxf203.github.io/2024/05/09/%E5%BF%AB%E9%80%9F%E5%B9%82/" title="https:&#x2F;&#x2F;yxf203.github.io&#x2F;2024&#x2F;05&#x2F;09&#x2F;%E5%BF%AB%E9%80%9F%E5%B9%82&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;yxf203.github.io&#x2F;2024&#x2F;05&#x2F;09&#x2F;%E5%BF%AB%E9%80%9F%E5%B9%82&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E5%BF%AB%E9%80%9F%E5%B9%82/" rel="tag">-快速幂</a>
+    
+</div>
+  
+  
+    <script async src="/js/copy-codeblock.js?v=1716098223417"></script>
+  
+
+  
+      <div class="nexmoe-post-footer">
+          
+      </div>
+  
+</div></div><div class="nexmoe-post-right">    <div class="nexmoe-fixed">
+        <div class="nexmoe-tool">
+
+            
+
+            
+            
+            <button class="mdui-fab catalog" style="overflow:unset;">
+                <i class="nexmoefont icon-i-catalog"></i>
+                <div class="nexmoe-toc">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%B9%82"><span class="toc-number">1.</span> <span class="toc-text"> 快速幂</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">1.1.</span> <span class="toc-text"> 定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%83%B3%E6%B3%95"><span class="toc-number">1.2.</span> <span class="toc-text"> 想法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ff%E7%90%86%E8%A7%A3%E7%9A%84"><span class="toc-number">1.3.</span> <span class="toc-text"> ff理解的！</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ff%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="toc-number">1.4.</span> <span class="toc-text"> ff的代码</span></a></li></ol></li></ol>
+                </div>
+            </button>
+            
+
+            
+
+            <a href="#nexmoe-content" class="backtop toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+        </div>
+    </div>
+</div></div><div id="nexmoe-footer"><!--!--></div><div id="nexmoe-search-space"><div class="search-container"><div class="search-header"><div class="search-input-container"><input class="search-input" type="text" placeholder="搜索" onInput="sinput();"></div><a class="search-close" onclick="sclose();">×</a></div><div class="search-body"></div></div></div><div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2058306854838448" crossorigin="anonymous"></script>
+</div></body></html>
