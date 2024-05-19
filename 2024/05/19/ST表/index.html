@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="zh"><head>
+<title>ST表 - fff从零开始的博客OvO</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta name="description" content="哼哼哼，尽管后天晚上就要考运筹学，但是一点都没预习，但是现在还是要！ 走进ff的ST表小课堂！ 今天是照着 https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;105439034 这个链接学习的ST表！  介绍 ST表，高效处理区间查询的数据结构（竟然只需要O(1)的时间来查询！），多用于解决区间最值问题！（就是最大值最小值之类的啦！）  时间复杂度  O(nlogn)预处理 O(1) 查询">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ST表">
+<meta property="og:url" content="https://yxf203.github.io/2024/05/19/ST%E8%A1%A8/index.html">
+<meta property="og:site_name" content="fff从零开始的博客OvO">
+<meta property="og:description" content="哼哼哼，尽管后天晚上就要考运筹学，但是一点都没预习，但是现在还是要！ 走进ff的ST表小课堂！ 今天是照着 https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;105439034 这个链接学习的ST表！  介绍 ST表，高效处理区间查询的数据结构（竟然只需要O(1)的时间来查询！），多用于解决区间最值问题！（就是最大值最小值之类的啦！）  时间复杂度  O(nlogn)预处理 O(1) 查询">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic4.zhimg.com/v2-22d8a24faea894fb8ddceae627093bbf_r.jpg">
+<meta property="article:published_time" content="2024-05-19T05:59:45.000Z">
+<meta property="article:modified_time" content="2024-05-19T09:04:16.871Z">
+<meta property="article:author" content="YXF">
+<meta property="article:tag" content="ST表">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic4.zhimg.com/v2-22d8a24faea894fb8ddceae627093bbf_r.jpg">
+
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1716109469600">
+
+<link rel="stylesheet" href="/css/style.css?v=1716109469600">
+
+
+
+
+    
+        <link rel="stylesheet" href="/custom.css?v=1716109469600">
+    
+
+
+
+<script src="/lib/mdui_043tiny/mdui.js" async></script>
+<script src="/lib/fancybox/fancybox.umd.js" async></script>
+<script src="/lib/lax.min.js" async></script>
+
+
+<script async src="/js/app.js?v=1716109469600"></script>
+
+ 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4D4ZJ9G024"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+
+  gtag("config", "G-4D4ZJ9G024");
+</script>
+
+
+<link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+<meta name="generator" content="Hexo 6.3.0"></head><body class="nexmoe mdui-drawer-body-left"><div id="nexmoe-background"><div class="nexmoe-bg" style="background-image: url(/../../images/bcg.png)"></div><div class="mdui-appbar mdui-shadow-0"><div class="mdui-toolbar"><a class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target: &#039;#drawer&#039;, swipe: true}" title="menu"><i class="mdui-icon nexmoefont icon-menu"></i></a><div class="mdui-toolbar-spacer"></div><a class="mdui-btn mdui-btn-icon" href="/" title="YXF"><img src="/../../images/avatar.jpg" alt="YXF"></a></div></div></div><div id="nexmoe-header"><div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="YXF">
+            <img src="/../../images/avatar.jpg" alt="YXF" alt="YXF">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>6</div>
+        <div><span>标签</span>4</div>
+        <div><span>分类</span>2</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+    </div>
+    
+    
+        
+        
+        
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/05/19/ST%E8%A1%A8/">ST表</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/09/%E5%BF%AB%E9%80%9F%E5%B9%82/">快速幂</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/07/ff%E7%9A%84%E7%A2%8E%E7%A2%8E%E5%BF%B5/">2024.3.7的碎碎念启动！</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/25/Cities/">C. Closest Cities</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/25/Triangles/">B. Forming Triangles</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+   
+    <div class="nexmoe-copyright">
+        &copy; 2024 YXF
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer --></div><div id="nexmoe-content"><div class="nexmoe-primary"><div class="nexmoe-post">
+  <article>
+    
+        <div class="nexmoe-post-cover"> 
+            <img src="/../../images/bcg.png" alt="ST表" loading="lazy">
+            <h1>ST表</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2024年05月19日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+        
+        
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+    <p>哼哼哼，尽管后天晚上就要考运筹学，但是一点都没预习，但是现在还是要！<br />
+走进ff的ST表小课堂！</p>
+<p>今天是照着</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/105439034">https://zhuanlan.zhihu.com/p/105439034</a></p>
+<p>这个链接学习的ST表！</p>
+<h3 id="介绍"><a class="markdownIt-Anchor" href="#介绍"></a> 介绍</h3>
+<p>ST表，高效处理区间查询的数据结构（竟然只需要<code>O(1)</code>的时间来查询！），多用于解决区间最值问题！（就是最大值最小值之类的啦！）</p>
+<h3 id="时间复杂度"><a class="markdownIt-Anchor" href="#时间复杂度"></a> 时间复杂度</h3>
+<ul>
+<li><code>O(nlogn)</code>预处理</li>
+<li><code>O(1)</code> 查询区间最值</li>
+</ul>
+<h3 id="ff的理解"><a class="markdownIt-Anchor" href="#ff的理解"></a> ff的理解</h3>
+<p>（以求最大值为例）</p>
+<ul>
+<li>预处理部分
+<ul>
+<li>见模板中的f数组，首先，f数组的第一维表示的是从哪一位开始，第二个参数表示的是2<sup>i</sup>的这个指数。然后，f数组的意义就是，（假设为<code>f[i][j]</code>）从第i位开始取2<sup>j</sup>个元素。原理图如下！（直接借用的原帖的图！）（这个设计真是太精彩惹！）</li>
+<li><img onerror="imgOnError(this);" data-fancybox="gallery" src="https://pic4.zhimg.com/v2-22d8a24faea894fb8ddceae627093bbf_r.jpg" alt="img" data-caption="img" loading="lazy"></li>
+<li>鼠鼠的理解是这样的，因为是从第i位取2<sup>j</sup>个元素。这样我们的<code>f[j][i+1]=f[j][i] + f[j+2^i][i]</code>,也就是上个图表示的过程，从上向下就是将2<sup>i+1</sup>个元素分为了两半处理。</li>
+</ul>
+</li>
+<li>查询部分
+<ul>
+<li>首先看完预处理部分，我的内心是，啊？？不是查[l,r]区间内的吗？这这这，只取一个<code>f[i][x]</code>不合适吧，也不一定就是距离就是2的次方呀（疑惑.jpg）。</li>
+<li>然后又是比较巧妙的一点，取[l, r]的两个子区间 设为t1,t2，要求：<code>t1∪t2=[l, r]</code>,而<code>t1∩t2</code>大部分不为空，为空的话也应该是刚好接合。</li>
+<li>接下来我们就可以开始推演了，很正常得到这个的一个思路就是一个区间从l开始，一个区间以r结束。这样子两个区间就是[l, l + 2<sup>x</sup> - 1]和[r - 2<sup>y</sup> + 1, r].
+<ul>
+<li>而为了方便呢，我们这边当然直接让！<code>x=y</code>啦！少算一次不是次吗？</li>
+<li>而保证其能够满足<code>t1∪t2=[l, r]</code>,我们让[l, l + 2<sup>x</sup> - 1]的右侧尽可能靠近r。即<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mo>+</mo><msup><mn>2</mn><mi>s</mi></msup><mo>−</mo><mn>1</mn><mo>=</mo><mi>r</mi></mrow><annotation encoding="application/x-tex">l+2^s - 1 = r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.747722em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span></span></span></span> ,得到<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mo>=</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mo stretchy="false">(</mo><mi>r</mi><mo>−</mo><mi>l</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">s = log_2(r - l + 1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span>,考虑到s为整数，我们对其进行向下取整，得到<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mo>=</mo><mo stretchy="false">⌊</mo><mi>l</mi><mi>o</mi><mi>g</mi><mn>2</mn><mo stretchy="false">(</mo><mi>r</mi><mo>−</mo><mi>l</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo stretchy="false">⌋</mo></mrow><annotation encoding="application/x-tex">s = \lfloor log2(r - l + 1)\rfloor</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">⌊</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord">2</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mclose">⌋</span></span></span></span>.</li>
+<li>最后我们只要比较这两个区间取它的最大值就好啦！</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="模板"><a class="markdownIt-Anchor" href="#模板"></a> 模板</h3>
+<p>是，抄，的，模，板！</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> A[N], f[__lg(N) + <span class="hljs-number">1</span>][N];<br><span class="hljs-comment">// 预处理</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">init</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i)<br>        f[<span class="hljs-number">0</span>][i] = A[i];<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= __lg(n); ++i)<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j + (<span class="hljs-number">1</span> &lt;&lt; i) - <span class="hljs-number">1</span> &lt;= n; ++j)<br>            f[i][j] = <span class="hljs-built_in">max</span>(f[i - <span class="hljs-number">1</span>][j], f[i - <span class="hljs-number">1</span>][j + (<span class="hljs-number">1</span> &lt;&lt; (i - <span class="hljs-number">1</span>))]);<br>&#125;<br><span class="hljs-comment">// 查询</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">query</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span> </span>&#123;<br>    <span class="hljs-type">int</span> s = __lg(r - l + <span class="hljs-number">1</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>(f[s][l], f[s][r - (<span class="hljs-number">1</span> &lt;&lt; s) + <span class="hljs-number">1</span>]);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>踩坑记录：</p>
+<ol>
+<li>init里面两个for循环，呜呜呜是有先后顺序的，当然是，先遍历小的那个2<sup>i</sup>的所有情况才会下一个啦呜呜呜，反了的话就会出问题呢！</li>
+</ol>
+
+    <p>今天大概也在努力吧~o(*￣▽￣*)ブ</p>
+
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>YXF<br>
+        <strong>本文链接：</strong><a href="https://yxf203.github.io/2024/05/19/ST%E8%A1%A8/" title="https:&#x2F;&#x2F;yxf203.github.io&#x2F;2024&#x2F;05&#x2F;19&#x2F;ST%E8%A1%A8&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;yxf203.github.io&#x2F;2024&#x2F;05&#x2F;19&#x2F;ST%E8%A1%A8&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/ST%E8%A1%A8/" rel="tag">ST表</a>
+    
+</div>
+  
+  
+    <script async src="/js/copy-codeblock.js?v=1716109469580"></script>
+  
+
+  
+      <div class="nexmoe-post-footer">
+          
+      </div>
+  
+</div></div><div class="nexmoe-post-right">    <div class="nexmoe-fixed">
+        <div class="nexmoe-tool">
+
+            
+
+            
+            
+            <button class="mdui-fab catalog" style="overflow:unset;">
+                <i class="nexmoefont icon-i-catalog"></i>
+                <div class="nexmoe-toc">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text"> 介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">2.</span> <span class="toc-text"> 时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ff%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">3.</span> <span class="toc-text"> ff的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E6%9D%BF"><span class="toc-number">4.</span> <span class="toc-text"> 模板</span></a></li></ol>
+                </div>
+            </button>
+            
+
+            
+
+            <a href="#nexmoe-content" class="backtop toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+        </div>
+    </div>
+</div></div><div id="nexmoe-footer"><!--!--></div><div id="nexmoe-search-space"><div class="search-container"><div class="search-header"><div class="search-input-container"><input class="search-input" type="text" placeholder="搜索" onInput="sinput();"></div><a class="search-close" onclick="sclose();">×</a></div><div class="search-body"></div></div></div><div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2058306854838448" crossorigin="anonymous"></script>
+</div></body></html>
