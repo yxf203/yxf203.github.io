@@ -1,37 +1,32 @@
 <!doctype html>
 <html lang="zh"><head>
-<title>dp基础 - fff从零开始的博客OvO</title>
+<title>标签：踩坑 - fff从零开始的博客OvO</title>
 <meta charset="UTF-8">
 <meta name="keywords" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-<meta name="description" content="哈哈哈，鼠鼠终于开始看dp啦！省赛倒计时2天！（悲，嗯嗯又要全靠队友惹  介绍 首先是对动态规划（dynamic programming）的一个介绍，也是对上的算法内容的一个温习。  DP  把原始问题划分为一系列子问题 求解每个问题仅一次，并将其结果保存在一个表中，以后用到时直接存取，不重复计算，节省计算时间（感觉这个是比较关键的一步） 自底向上地求解子问题   适用范围  一类优化问题：可分为">
-<meta property="og:type" content="article">
-<meta property="og:title" content="dp基础">
-<meta property="og:url" content="https://yxf203.github.io/2024/05/23/dp%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="fff从零开始的博客OvO">
+<meta property="og:url" content="https://yxf203.github.io/tags/%E8%B8%A9%E5%9D%91/index.html">
 <meta property="og:site_name" content="fff从零开始的博客OvO">
-<meta property="og:description" content="哈哈哈，鼠鼠终于开始看dp啦！省赛倒计时2天！（悲，嗯嗯又要全靠队友惹  介绍 首先是对动态规划（dynamic programming）的一个介绍，也是对上的算法内容的一个温习。  DP  把原始问题划分为一系列子问题 求解每个问题仅一次，并将其结果保存在一个表中，以后用到时直接存取，不重复计算，节省计算时间（感觉这个是比较关键的一步） 自底向上地求解子问题   适用范围  一类优化问题：可分为">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-05-23T13:10:05.000Z">
-<meta property="article:modified_time" content="2024-05-23T13:33:44.777Z">
 <meta property="article:author" content="YXF">
-<meta property="article:tag" content="dp">
 <meta name="twitter:card" content="summary">
 
 <link rel="stylesheet" href="/lib/fancybox/fancybox.css">
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1720339080836">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1720339080869">
 
-<link rel="stylesheet" href="/css/style.css?v=1720339080836">
+<link rel="stylesheet" href="/css/style.css?v=1720339080869">
 
 
 
 
     
-        <link rel="stylesheet" href="/custom.css?v=1720339080836">
+        <link rel="stylesheet" href="/custom.css?v=1720339080869">
     
 
 
@@ -41,7 +36,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1720339080836"></script>
+<script async src="/js/app.js?v=1720339080869"></script>
 
  
 
@@ -141,18 +136,20 @@
         & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
         
     </div>
-</div><!-- .nexmoe-drawer --></div><div id="nexmoe-content"><div class="nexmoe-primary"><div class="nexmoe-post">
-  <article>
-    
-        <div class="nexmoe-post-cover"> 
-            <img src="/../../images/bcg.png" alt="dp基础" loading="lazy">
-            <h1>dp基础</h1>
-        </div>
-    
-    
-    <div class="nexmoe-post-meta">
+</div><!-- .nexmoe-drawer --></div><div id="nexmoe-content"><div class="nexmoe-primary"><section class="nexmoe-posts">
+    <div class="nexmoe-post">
+        <a href="/2024/07/07/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/">
+            
+                <div class="nexmoe-post-cover mdui-ripple"> 
+                    <img src="/../../images/bcg.png" alt="踩坑记录" loading="lazy">
+                    <h1>踩坑记录</h1>
+                </div>
+            
+        </a>
+
+        <div class="nexmoe-post-meta">
     <div class="nexmoe-rainbow">
-        <a class="nexmoefont icon-calendar-fill">2024年05月23日</a>
+        <a class="nexmoefont icon-calendar-fill">2024年07月07日</a>
         
             <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
         
@@ -165,93 +162,16 @@
     
 </div>
 
-    <p>哈哈哈，鼠鼠终于开始看dp啦！省赛倒计时2天！（悲，嗯嗯又要全靠队友惹</p>
-<h3 id="介绍"><a class="markdownIt-Anchor" href="#介绍"></a> 介绍</h3>
-<p>首先是对动态规划（dynamic programming）的一个介绍，也是对上的算法内容的一个温习。</p>
-<ul>
-<li>DP
-<ul>
-<li>把原始问题划分为一系列子问题</li>
-<li>求解每个问题仅一次，并将其结果保存在一个表中，以后用到时直接存取，不重复计算，节省计算时间（感觉这个是比较关键的一步）</li>
-<li>自底向上地求解子问题</li>
-</ul>
-</li>
-<li>适用范围
-<ul>
-<li>一类优化问题：可分为多个相关子问题，子问题的解被重复使用</li>
-</ul>
-</li>
-<li>使用DP的条件
-<ul>
-<li>优化子结构
-<ul>
-<li>当一个问题的优化解包含了子问题的优化解时，我们说这个问题具有优化子结构。</li>
-</ul>
-</li>
-<li>重叠子问题
-<ul>
-<li>在问题的求解过程中，很多子问题的解将被多次使用。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>（好，非常正规，非常嗯！非常正规呢就是！</p>
-<p>然后我们进行一个知识的迁移：</p>
-<p>其实这里的优化子结构就类似于我们的状态转移方程，</p>
-<p>然后<strong>解题关键</strong>在于：</p>
-<ol>
-<li>找到状态（阶段）</li>
-<li>找到状态转移方程（决策）</li>
-</ol>
-
-    <p>今天大概也在努力吧~o(*￣▽￣*)ブ</p>
-
-  </article>
-
-  
-      
-    <div class="nexmoe-post-copyright">
-        <strong>本文作者：</strong>YXF<br>
-        <strong>本文链接：</strong><a href="https://yxf203.github.io/2024/05/23/dp%E5%9F%BA%E7%A1%80/" title="https:&#x2F;&#x2F;yxf203.github.io&#x2F;2024&#x2F;05&#x2F;23&#x2F;dp%E5%9F%BA%E7%A1%80&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;yxf203.github.io&#x2F;2024&#x2F;05&#x2F;23&#x2F;dp%E5%9F%BA%E7%A1%80&#x2F;</a><br>
-        
-            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
-
-        
+        <article>
+            
+        </article>
     </div>
-
-
-  
-  
-  <div class="nexmoe-post-meta nexmoe-rainbow">
-   
-    
-        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/dp/" rel="tag">dp</a>
-    
-</div>
-  
-  
-    <script async src="/js/copy-codeblock.js?v=1720339080800"></script>
-  
-
-  
-      <div class="nexmoe-post-footer">
-          
-      </div>
-  
-</div></div><div class="nexmoe-post-right">    <div class="nexmoe-fixed">
+</section> </div><div class="nexmoe-post-right">    <div class="nexmoe-fixed">
         <div class="nexmoe-tool">
 
             
 
             
-            
-            <button class="mdui-fab catalog" style="overflow:unset;">
-                <i class="nexmoefont icon-i-catalog"></i>
-                <div class="nexmoe-toc">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text"> 介绍</span></a></li></ol>
-                </div>
-            </button>
             
 
             

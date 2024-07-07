@@ -1,37 +1,37 @@
 <!doctype html>
 <html lang="zh"><head>
-<title>dp基础 - fff从零开始的博客OvO</title>
+<title>踩坑记录 - fff从零开始的博客OvO</title>
 <meta charset="UTF-8">
 <meta name="keywords" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-<meta name="description" content="哈哈哈，鼠鼠终于开始看dp啦！省赛倒计时2天！（悲，嗯嗯又要全靠队友惹  介绍 首先是对动态规划（dynamic programming）的一个介绍，也是对上的算法内容的一个温习。  DP  把原始问题划分为一系列子问题 求解每个问题仅一次，并将其结果保存在一个表中，以后用到时直接存取，不重复计算，节省计算时间（感觉这个是比较关键的一步） 自底向上地求解子问题   适用范围  一类优化问题：可分为">
+<meta name="description" content="虽然之前被建议说不需要刷普及-的题，但是ff还是根据自己的实际实力出发，发现其实普及-的题目ff可能也没有做的那么顺利。 这边就记录一些小小的踩坑吧。   向下取整部分踩坑 洛谷 P7072 原本写的是 int(i * 0.01 * w)来实现一个向下取整的效果，结果有几个测试点没过。 再看了一眼提示，改成了i * w &#x2F; 100，AC了。 再试了一下int num &#x3D; floor(i * 0.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="dp基础">
-<meta property="og:url" content="https://yxf203.github.io/2024/05/23/dp%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:title" content="踩坑记录">
+<meta property="og:url" content="https://yxf203.github.io/2024/07/07/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="fff从零开始的博客OvO">
-<meta property="og:description" content="哈哈哈，鼠鼠终于开始看dp啦！省赛倒计时2天！（悲，嗯嗯又要全靠队友惹  介绍 首先是对动态规划（dynamic programming）的一个介绍，也是对上的算法内容的一个温习。  DP  把原始问题划分为一系列子问题 求解每个问题仅一次，并将其结果保存在一个表中，以后用到时直接存取，不重复计算，节省计算时间（感觉这个是比较关键的一步） 自底向上地求解子问题   适用范围  一类优化问题：可分为">
+<meta property="og:description" content="虽然之前被建议说不需要刷普及-的题，但是ff还是根据自己的实际实力出发，发现其实普及-的题目ff可能也没有做的那么顺利。 这边就记录一些小小的踩坑吧。   向下取整部分踩坑 洛谷 P7072 原本写的是 int(i * 0.01 * w)来实现一个向下取整的效果，结果有几个测试点没过。 再看了一眼提示，改成了i * w &#x2F; 100，AC了。 再试了一下int num &#x3D; floor(i * 0.">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-05-23T13:10:05.000Z">
-<meta property="article:modified_time" content="2024-05-23T13:33:44.777Z">
+<meta property="article:published_time" content="2024-07-07T03:08:42.000Z">
+<meta property="article:modified_time" content="2024-07-07T03:16:10.298Z">
 <meta property="article:author" content="YXF">
-<meta property="article:tag" content="dp">
+<meta property="article:tag" content="踩坑">
 <meta name="twitter:card" content="summary">
 
 <link rel="stylesheet" href="/lib/fancybox/fancybox.css">
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1720339080836">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1720339080827">
 
-<link rel="stylesheet" href="/css/style.css?v=1720339080836">
+<link rel="stylesheet" href="/css/style.css?v=1720339080827">
 
 
 
 
     
-        <link rel="stylesheet" href="/custom.css?v=1720339080836">
+        <link rel="stylesheet" href="/custom.css?v=1720339080827">
     
 
 
@@ -41,7 +41,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1720339080836"></script>
+<script async src="/js/app.js?v=1720339080827"></script>
 
  
 
@@ -145,14 +145,14 @@
   <article>
     
         <div class="nexmoe-post-cover"> 
-            <img src="/../../images/bcg.png" alt="dp基础" loading="lazy">
-            <h1>dp基础</h1>
+            <img src="/../../images/bcg.png" alt="踩坑记录" loading="lazy">
+            <h1>踩坑记录</h1>
         </div>
     
     
     <div class="nexmoe-post-meta">
     <div class="nexmoe-rainbow">
-        <a class="nexmoefont icon-calendar-fill">2024年05月23日</a>
+        <a class="nexmoefont icon-calendar-fill">2024年07月07日</a>
         
             <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
         
@@ -165,45 +165,19 @@
     
 </div>
 
-    <p>哈哈哈，鼠鼠终于开始看dp啦！省赛倒计时2天！（悲，嗯嗯又要全靠队友惹</p>
-<h3 id="介绍"><a class="markdownIt-Anchor" href="#介绍"></a> 介绍</h3>
-<p>首先是对动态规划（dynamic programming）的一个介绍，也是对上的算法内容的一个温习。</p>
-<ul>
-<li>DP
-<ul>
-<li>把原始问题划分为一系列子问题</li>
-<li>求解每个问题仅一次，并将其结果保存在一个表中，以后用到时直接存取，不重复计算，节省计算时间（感觉这个是比较关键的一步）</li>
-<li>自底向上地求解子问题</li>
-</ul>
-</li>
-<li>适用范围
-<ul>
-<li>一类优化问题：可分为多个相关子问题，子问题的解被重复使用</li>
-</ul>
-</li>
-<li>使用DP的条件
-<ul>
-<li>优化子结构
-<ul>
-<li>当一个问题的优化解包含了子问题的优化解时，我们说这个问题具有优化子结构。</li>
-</ul>
-</li>
-<li>重叠子问题
-<ul>
-<li>在问题的求解过程中，很多子问题的解将被多次使用。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>（好，非常正规，非常嗯！非常正规呢就是！</p>
-<p>然后我们进行一个知识的迁移：</p>
-<p>其实这里的优化子结构就类似于我们的状态转移方程，</p>
-<p>然后<strong>解题关键</strong>在于：</p>
-<ol>
-<li>找到状态（阶段）</li>
-<li>找到状态转移方程（决策）</li>
-</ol>
+    <blockquote>
+<p>虽然之前被建议说不需要刷普及-的题，但是ff还是根据自己的实际实力出发，发现其实普及-的题目ff可能也没有做的那么顺利。</p>
+<p>这边就记录一些小小的踩坑吧。</p>
+</blockquote>
+<h3 id="向下取整部分踩坑"><a class="markdownIt-Anchor" href="#向下取整部分踩坑"></a> 向下取整部分踩坑</h3>
+<p>洛谷 P7072</p>
+<p>原本写的是 <code>int(i * 0.01 * w)</code>来实现一个向下取整的效果，结果有几个测试点没过。</p>
+<p>再看了一眼提示，改成了<code>i * w / 100</code>，AC了。</p>
+<p>再试了一下<code>int num = floor(i * 0.01 * w);</code>这个写法，也是不太行的。</p>
+<p>记录一下提示内容：</p>
+<blockquote>
+<p>在计算计划获奖人数时，如用浮点类型的变量（如 C/C++ 中的 <code>float</code> 、 <code>double</code>，Pascal 中的 <code>real</code> 、 <code>double</code> 、 <code>extended</code> 等）存储获奖比例 𝑤%，则计算 5×60% 时的结果可能为 3.000001，也可能为 2.999999，向下取整后的结果不确定。因此，建议仅使用整型变量，以计算出准确值。</p>
+</blockquote>
 
     <p>今天大概也在努力吧~o(*￣▽￣*)ブ</p>
 
@@ -213,7 +187,7 @@
       
     <div class="nexmoe-post-copyright">
         <strong>本文作者：</strong>YXF<br>
-        <strong>本文链接：</strong><a href="https://yxf203.github.io/2024/05/23/dp%E5%9F%BA%E7%A1%80/" title="https:&#x2F;&#x2F;yxf203.github.io&#x2F;2024&#x2F;05&#x2F;23&#x2F;dp%E5%9F%BA%E7%A1%80&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;yxf203.github.io&#x2F;2024&#x2F;05&#x2F;23&#x2F;dp%E5%9F%BA%E7%A1%80&#x2F;</a><br>
+        <strong>本文链接：</strong><a href="https://yxf203.github.io/2024/07/07/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" title="https:&#x2F;&#x2F;yxf203.github.io&#x2F;2024&#x2F;07&#x2F;07&#x2F;%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;yxf203.github.io&#x2F;2024&#x2F;07&#x2F;07&#x2F;%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95&#x2F;</a><br>
         
             <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
 
@@ -226,12 +200,12 @@
   <div class="nexmoe-post-meta nexmoe-rainbow">
    
     
-        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/dp/" rel="tag">dp</a>
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E8%B8%A9%E5%9D%91/" rel="tag">踩坑</a>
     
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1720339080800"></script>
+    <script async src="/js/copy-codeblock.js?v=1720339080799"></script>
   
 
   
@@ -249,7 +223,7 @@
             <button class="mdui-fab catalog" style="overflow:unset;">
                 <i class="nexmoefont icon-i-catalog"></i>
                 <div class="nexmoe-toc">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text"> 介绍</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%91%E4%B8%8B%E5%8F%96%E6%95%B4%E9%83%A8%E5%88%86%E8%B8%A9%E5%9D%91"><span class="toc-number">1.</span> <span class="toc-text"> 向下取整部分踩坑</span></a></li></ol>
                 </div>
             </button>
             
