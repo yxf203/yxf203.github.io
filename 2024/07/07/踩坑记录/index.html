@@ -14,7 +14,7 @@
 <meta property="og:description" content="虽然之前被建议说不需要刷普及-的题，但是ff还是根据自己的实际实力出发，发现其实普及-的题目ff可能也没有做的那么顺利。 这边就记录一些小小的踩坑吧。   向下取整部分踩坑 洛谷 P7072 原本写的是 int(i * 0.01 * w)来实现一个向下取整的效果，结果有几个测试点没过。 再看了一眼提示，改成了i * w &#x2F; 100，AC了。 再试了一下int num &#x3D; floor(i * 0.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-07T03:08:42.000Z">
-<meta property="article:modified_time" content="2024-07-07T03:16:10.298Z">
+<meta property="article:modified_time" content="2024-07-07T10:03:14.861Z">
 <meta property="article:author" content="YXF">
 <meta property="article:tag" content="踩坑">
 <meta name="twitter:card" content="summary">
@@ -23,15 +23,15 @@
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1720339080827">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1720346638576">
 
-<link rel="stylesheet" href="/css/style.css?v=1720339080827">
+<link rel="stylesheet" href="/css/style.css?v=1720346638576">
 
 
 
 
     
-        <link rel="stylesheet" href="/custom.css?v=1720339080827">
+        <link rel="stylesheet" href="/custom.css?v=1720346638576">
     
 
 
@@ -41,7 +41,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1720339080827"></script>
+<script async src="/js/app.js?v=1720346638576"></script>
 
  
 
@@ -178,6 +178,18 @@
 <blockquote>
 <p>在计算计划获奖人数时，如用浮点类型的变量（如 C/C++ 中的 <code>float</code> 、 <code>double</code>，Pascal 中的 <code>real</code> 、 <code>double</code> 、 <code>extended</code> 等）存储获奖比例 𝑤%，则计算 5×60% 时的结果可能为 3.000001，也可能为 2.999999，向下取整后的结果不确定。因此，建议仅使用整型变量，以计算出准确值。</p>
 </blockquote>
+<h3 id="不管空间的死活导致了mle"><a class="markdownIt-Anchor" href="#不管空间的死活导致了mle"></a> 不管空间的死活导致了MLE</h3>
+<p>哈哈，难道一道题目思路非常通顺也非常正确！（贴题目链接：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2671%EF%BC%89">https://www.luogu.com.cn/problem/P2671）</a></p>
+<p>哈哈，结果写出了下面的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 10010</span><br><br>queue&lt;<span class="hljs-type">int</span>&gt; q[N][<span class="hljs-number">2</span>];<br></code></pre></td></tr></table></figure>
+<p>嗯！MLE！哈哈！MLE！！</p>
+<p>总结了一下确实没有仔细去考虑空间复杂度的问题（毕竟之前怎么乱开空间都没爆啊(#`O′) ）。</p>
+<p>然后这里确实也是吃了教训， 假设有一个数组里面有1000个元素，那么 <code>10010*2*1000*4B = 80MB</code>.其实还挺可怕的，一个队列里可能元素还会超过1000个，但是限定的内存只有128MB.</p>
+<p>然后这里确实是虽然思路正确，但是在一些细节的处理上还不够数学化，或者不够简单化。</p>
+<p>嗯，具体表现为：</p>
+<p>我想的是把每个颜色对应的奇偶丢尽队列里面，然后来统计队列的长度，从而得到要的size。</p>
+<p>但是其实没必要这么做，再开个数组记录，然后其实可以更全局一点思考的。（语无伦次）</p>
+<p>总之是！记录下来啦！</p>
 
     <p>今天大概也在努力吧~o(*￣▽￣*)ブ</p>
 
@@ -205,7 +217,7 @@
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1720339080799"></script>
+    <script async src="/js/copy-codeblock.js?v=1720346638547"></script>
   
 
   
@@ -223,7 +235,7 @@
             <button class="mdui-fab catalog" style="overflow:unset;">
                 <i class="nexmoefont icon-i-catalog"></i>
                 <div class="nexmoe-toc">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%91%E4%B8%8B%E5%8F%96%E6%95%B4%E9%83%A8%E5%88%86%E8%B8%A9%E5%9D%91"><span class="toc-number">1.</span> <span class="toc-text"> 向下取整部分踩坑</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%91%E4%B8%8B%E5%8F%96%E6%95%B4%E9%83%A8%E5%88%86%E8%B8%A9%E5%9D%91"><span class="toc-number">1.</span> <span class="toc-text"> 向下取整部分踩坑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E7%AE%A1%E7%A9%BA%E9%97%B4%E7%9A%84%E6%AD%BB%E6%B4%BB%E5%AF%BC%E8%87%B4%E4%BA%86mle"><span class="toc-number">2.</span> <span class="toc-text"> 不管空间的死活导致了MLE</span></a></li></ol>
                 </div>
             </button>
             
