@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="zh"><head>
+<title>单调栈 - fff从零开始的博客OvO</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta name="description" content="昨天感觉情绪很糟糕 然后就偷偷摸鱼啦，今天才来补这个。   单调栈 因为做题的时候遇到了，看了一眼题解发现是单调栈，但是并不了解这个内容。 然后大致了解了一下，单调栈本身还是比较容易理解的，就是始终维持着栈（或者数组）为一个单调递增或者单调递减的性质。 以单调递增为例，如果要入栈的数比栈中最后的元素大，则直接入栈；如果要入栈的数比栈中最后的元素小，则持续弹栈，知道栈为空或者栈中最后一个元素小于要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单调栈">
+<meta property="og:url" content="https://yxf203.github.io/2024/07/10/%E5%8D%95%E8%B0%83%E6%A0%88/index.html">
+<meta property="og:site_name" content="fff从零开始的博客OvO">
+<meta property="og:description" content="昨天感觉情绪很糟糕 然后就偷偷摸鱼啦，今天才来补这个。   单调栈 因为做题的时候遇到了，看了一眼题解发现是单调栈，但是并不了解这个内容。 然后大致了解了一下，单调栈本身还是比较容易理解的，就是始终维持着栈（或者数组）为一个单调递增或者单调递减的性质。 以单调递增为例，如果要入栈的数比栈中最后的元素大，则直接入栈；如果要入栈的数比栈中最后的元素小，则持续弹栈，知道栈为空或者栈中最后一个元素小于要">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-10T03:41:33.000Z">
+<meta property="article:modified_time" content="2024-07-10T03:41:33.958Z">
+<meta property="article:author" content="YXF">
+<meta property="article:tag" content="单调栈">
+<meta name="twitter:card" content="summary">
+
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1720582930440">
+
+<link rel="stylesheet" href="/css/style.css?v=1720582930440">
+
+
+
+
+    
+        <link rel="stylesheet" href="/custom.css?v=1720582930440">
+    
+
+
+
+<script src="/lib/mdui_043tiny/mdui.js" async></script>
+<script src="/lib/fancybox/fancybox.umd.js" async></script>
+<script src="/lib/lax.min.js" async></script>
+
+
+<script async src="/js/app.js?v=1720582930441"></script>
+
+ 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4D4ZJ9G024"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+
+  gtag("config", "G-4D4ZJ9G024");
+</script>
+
+
+<link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+<meta name="generator" content="Hexo 6.3.0"></head><body class="nexmoe mdui-drawer-body-left"><div id="nexmoe-background"><div class="nexmoe-bg" style="background-image: url(/../../images/bcg.png)"></div><div class="mdui-appbar mdui-shadow-0"><div class="mdui-toolbar"><a class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target: &#039;#drawer&#039;, swipe: true}" title="menu"><i class="mdui-icon nexmoefont icon-menu"></i></a><div class="mdui-toolbar-spacer"></div><a class="mdui-btn mdui-btn-icon" href="/" title="YXF"><img src="/../../images/avatar.jpg" alt="YXF"></a></div></div></div><div id="nexmoe-header"><div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="YXF">
+            <img src="/../../images/avatar.jpg" alt="YXF" alt="YXF">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>12</div>
+        <div><span>标签</span>10</div>
+        <div><span>分类</span>4</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+    </div>
+    
+    
+        
+        
+        
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">12</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/07/10/%E5%B0%9D%E8%AF%95LaTeX%E5%85%A5%E9%97%A8/">尝试LaTeX入门</a>
+          </li>
+        
+          <li>
+            <a href="/2024/07/10/%E5%8D%95%E8%B0%83%E6%A0%88/">单调栈</a>
+          </li>
+        
+          <li>
+            <a href="/2024/07/07/%E6%B4%9B%E8%B0%B7P1638%E9%80%9B%E7%94%BB%E5%B1%95/">洛谷P1638逛画展</a>
+          </li>
+        
+          <li>
+            <a href="/2024/07/07/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/">踩坑记录</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/28/%E6%AF%9B%E6%A6%82%E5%A4%8D%E4%B9%A0/">毛概复习</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+   
+    <div class="nexmoe-copyright">
+        &copy; 2024 YXF
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer --></div><div id="nexmoe-content"><div class="nexmoe-primary"><div class="nexmoe-post">
+  <article>
+    
+        <div class="nexmoe-post-cover"> 
+            <img src="/../../images/bcg.png" alt="单调栈" loading="lazy">
+            <h1>单调栈</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2024年07月10日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+        
+        
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+    <blockquote>
+<p>昨天感觉情绪很糟糕 然后就偷偷摸鱼啦，今天才来补这个。</p>
+</blockquote>
+<h2 id="单调栈"><a class="markdownIt-Anchor" href="#单调栈"></a> 单调栈</h2>
+<p>因为做题的时候遇到了，看了一眼题解发现是单调栈，但是并不了解这个内容。<br />
+然后大致了解了一下，单调栈本身还是比较容易理解的，就是始终维持着栈（或者数组）为一个单调递增或者单调递减的性质。<br />
+以单调递增为例，如果要入栈的数比栈中最后的元素大，则直接入栈；如果要入栈的数比栈中最后的元素小，则持续弹栈，知道栈为空或者栈中最后一个元素小于要入栈的数，再把这个数入栈。</p>
+<p>但是简单的数据结构难难的题（悲）。一点都不会呢。</p>
+<h2 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目</h2>
+<h3 id="题目1"><a class="markdownIt-Anchor" href="#题目1"></a> 题目1</h3>
+<p>先贴相应题目1：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4147">https://www.luogu.com.cn/problem/P4147</a><br />
+↑这个题目好难，我学不会，之后再来补题解。</p>
+<h3 id="题目2"><a class="markdownIt-Anchor" href="#题目2"></a> 题目2</h3>
+<p>题目2：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2866">https://www.luogu.com.cn/problem/P2866</a></p>
+<p>这也是一个单调栈的题目（不过本蒟蒻看完题解自己推了一遍然后才发现）</p>
+<p>如果从前向后的话，就是构建一个单调递减的栈。（题解的思路真的很巧妙）</p>
+<ul>
+<li>从前向后（这里指的是从编号的从前向后），先理解题意，这样子的话，后面来的想要看到前面的就需要比前面的矮。</li>
+<li>然后这个题解就很巧妙啊，把栈中所有比要入栈的元素给弹出去（因为是单调递减栈的话，后面的肯定是比前面的矮的），那么弹栈只需要考虑栈的top即可。</li>
+<li>然后弹完以后呢，那栈里面剩下的就是编号在前面的比要入栈的牛高的！这些栈中的牛都能看见这个要入栈的小牛啦！于是我们直接<code>sum+=s.size()</code>就可以加上能看到这只牛的牛的数量啦！</li>
+<li>这样以此类推，然后通过加上每只牛能被多少只牛看到，从而得到每个位置的牛能够看到多少只牛的加和！（太酷啦）</li>
+</ul>
+<p>贴代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">int</span> a[<span class="hljs-number">80010</span>];<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-type">int</span> n, i;<br>	<span class="hljs-type">long</span> <span class="hljs-type">long</span> sum = <span class="hljs-number">0</span>;<br>	stack&lt;<span class="hljs-type">int</span>&gt; s;<br>	cin&gt;&gt;n;<br>	<span class="hljs-keyword">for</span>(i = <span class="hljs-number">1</span>; i &lt;= n; i++)&#123;<br>		cin&gt;&gt;a[i];<br>	&#125; <br>	<span class="hljs-keyword">for</span>(i = <span class="hljs-number">1</span>; i &lt;= n; i++)&#123;<br>		<span class="hljs-keyword">while</span>(!s.<span class="hljs-built_in">empty</span>() &amp;&amp; s.<span class="hljs-built_in">top</span>() &lt;= a[i])&#123; <span class="hljs-comment">//这里遇到了一个小坑，就是这个等于号，因为题意那个是强大于，所以相等的情况也和矮的情况是一样的。</span><br>			s.<span class="hljs-built_in">pop</span>();<br>		&#125;<br>		sum += s.<span class="hljs-built_in">size</span>();<br>		s.<span class="hljs-built_in">push</span>(a[i]);<br>	&#125; <br>	cout&lt;&lt;sum&lt;&lt;endl;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>按照这个思路的话！从（序号的）后向前也能写的！</p>
+
+    <p>今天大概也在努力吧~o(*￣▽￣*)ブ</p>
+
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>YXF<br>
+        <strong>本文链接：</strong><a href="https://yxf203.github.io/2024/07/10/%E5%8D%95%E8%B0%83%E6%A0%88/" title="https:&#x2F;&#x2F;yxf203.github.io&#x2F;2024&#x2F;07&#x2F;10&#x2F;%E5%8D%95%E8%B0%83%E6%A0%88&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;yxf203.github.io&#x2F;2024&#x2F;07&#x2F;10&#x2F;%E5%8D%95%E8%B0%83%E6%A0%88&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" rel="tag">单调栈</a>
+    
+</div>
+  
+  
+    <script async src="/js/copy-codeblock.js?v=1720582930418"></script>
+  
+
+  
+      <div class="nexmoe-post-footer">
+          
+      </div>
+  
+</div></div><div class="nexmoe-post-right">    <div class="nexmoe-fixed">
+        <div class="nexmoe-tool">
+
+            
+
+            
+            
+            <button class="mdui-fab catalog" style="overflow:unset;">
+                <i class="nexmoefont icon-i-catalog"></i>
+                <div class="nexmoe-toc">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E8%B0%83%E6%A0%88"><span class="toc-number">1.</span> <span class="toc-text"> 单调栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE"><span class="toc-number">2.</span> <span class="toc-text"> 题目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE1"><span class="toc-number">2.1.</span> <span class="toc-text"> 题目1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE2"><span class="toc-number">2.2.</span> <span class="toc-text"> 题目2</span></a></li></ol></li></ol>
+                </div>
+            </button>
+            
+
+            
+
+            <a href="#nexmoe-content" class="backtop toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+        </div>
+    </div>
+</div></div><div id="nexmoe-footer"><!--!--></div><div id="nexmoe-search-space"><div class="search-container"><div class="search-header"><div class="search-input-container"><input class="search-input" type="text" placeholder="搜索" onInput="sinput();"></div><a class="search-close" onclick="sclose();">×</a></div><div class="search-body"></div></div></div><div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2058306854838448" crossorigin="anonymous"></script>
+</div></body></html>

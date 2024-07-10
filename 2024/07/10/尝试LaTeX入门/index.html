@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="zh"><head>
+<title>尝试LaTeX入门 - fff从零开始的博客OvO</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta name="description" content="（本片中大部分内容都是学习oi-wiki） 是小小的入个门！至少鼠鼠想知道这个东西到底是怎么写的！  发行版 首先就是编写LaTeX文档，需要安装发行版，常用的发行版有 TeX Live、MikTeX 和适用于 macOS 用户的 MacTeX（实际上是 TeX Live 的 macOS 版本）。 然后是询问了一下学长，学长推荐用 overleaf。 但还是想先了解一下最基础内容ovo所以就是先选">
+<meta property="og:type" content="article">
+<meta property="og:title" content="尝试LaTeX入门">
+<meta property="og:url" content="https://yxf203.github.io/2024/07/10/%E5%B0%9D%E8%AF%95LaTeX%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="fff从零开始的博客OvO">
+<meta property="og:description" content="（本片中大部分内容都是学习oi-wiki） 是小小的入个门！至少鼠鼠想知道这个东西到底是怎么写的！  发行版 首先就是编写LaTeX文档，需要安装发行版，常用的发行版有 TeX Live、MikTeX 和适用于 macOS 用户的 MacTeX（实际上是 TeX Live 的 macOS 版本）。 然后是询问了一下学长，学长推荐用 overleaf。 但还是想先了解一下最基础内容ovo所以就是先选">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240708173650625.png">
+<meta property="og:image" content="c:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240708174526413.png">
+<meta property="og:image" content="c:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240708174931848.png">
+<meta property="og:image" content="c:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240708175246393.png">
+<meta property="article:published_time" content="2024-07-10T03:41:53.000Z">
+<meta property="article:modified_time" content="2024-07-10T03:41:53.550Z">
+<meta property="article:author" content="YXF">
+<meta property="article:tag" content="LaTeX">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240708173650625.png">
+
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1720582930433">
+
+<link rel="stylesheet" href="/css/style.css?v=1720582930433">
+
+
+
+
+    
+        <link rel="stylesheet" href="/custom.css?v=1720582930433">
+    
+
+
+
+<script src="/lib/mdui_043tiny/mdui.js" async></script>
+<script src="/lib/fancybox/fancybox.umd.js" async></script>
+<script src="/lib/lax.min.js" async></script>
+
+
+<script async src="/js/app.js?v=1720582930433"></script>
+
+ 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4D4ZJ9G024"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+
+  gtag("config", "G-4D4ZJ9G024");
+</script>
+
+
+<link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+<meta name="generator" content="Hexo 6.3.0"></head><body class="nexmoe mdui-drawer-body-left"><div id="nexmoe-background"><div class="nexmoe-bg" style="background-image: url(/../../images/bcg.png)"></div><div class="mdui-appbar mdui-shadow-0"><div class="mdui-toolbar"><a class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target: &#039;#drawer&#039;, swipe: true}" title="menu"><i class="mdui-icon nexmoefont icon-menu"></i></a><div class="mdui-toolbar-spacer"></div><a class="mdui-btn mdui-btn-icon" href="/" title="YXF"><img src="/../../images/avatar.jpg" alt="YXF"></a></div></div></div><div id="nexmoe-header"><div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="YXF">
+            <img src="/../../images/avatar.jpg" alt="YXF" alt="YXF">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>12</div>
+        <div><span>标签</span>10</div>
+        <div><span>分类</span>4</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+    </div>
+    
+    
+        
+        
+        
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">12</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/07/10/%E5%B0%9D%E8%AF%95LaTeX%E5%85%A5%E9%97%A8/">尝试LaTeX入门</a>
+          </li>
+        
+          <li>
+            <a href="/2024/07/10/%E5%8D%95%E8%B0%83%E6%A0%88/">单调栈</a>
+          </li>
+        
+          <li>
+            <a href="/2024/07/07/%E6%B4%9B%E8%B0%B7P1638%E9%80%9B%E7%94%BB%E5%B1%95/">洛谷P1638逛画展</a>
+          </li>
+        
+          <li>
+            <a href="/2024/07/07/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/">踩坑记录</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/28/%E6%AF%9B%E6%A6%82%E5%A4%8D%E4%B9%A0/">毛概复习</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+   
+    <div class="nexmoe-copyright">
+        &copy; 2024 YXF
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer --></div><div id="nexmoe-content"><div class="nexmoe-primary"><div class="nexmoe-post">
+  <article>
+    
+        <div class="nexmoe-post-cover"> 
+            <img src="/../../images/bcg.png" alt="尝试LaTeX入门" loading="lazy">
+            <h1>尝试LaTeX入门</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2024年07月10日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+        
+        
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+    <p>（本片中大部分内容都是学习<a target="_blank" rel="noopener" href="https://oi-wiki.org/tools/latex/">oi-wiki</a>）</p>
+<p>是小小的入个门！至少鼠鼠想知道这个东西到底是怎么写的！</p>
+<h3 id="发行版"><a class="markdownIt-Anchor" href="#发行版"></a> 发行版</h3>
+<p>首先就是编写LaTeX文档，需要安装发行版，常用的发行版有 <a target="_blank" rel="noopener" href="http://tug.org/texlive/">TeX Live</a>、<a target="_blank" rel="noopener" href="https://miktex.org/">MikTeX</a> 和适用于 macOS 用户的 MacTeX（实际上是 TeX Live 的 macOS 版本）。</p>
+<p>然后是询问了一下学长，学长推荐用 overleaf。</p>
+<p>但还是想先了解一下最基础内容ovo所以就是先选择了Texlive+TexStudio（不知道会不会踩坑，但是下就完事！）.</p>
+<h3 id="一些记录"><a class="markdownIt-Anchor" href="#一些记录"></a> 一些记录</h3>
+<h4 id="documentclass"><a class="markdownIt-Anchor" href="#documentclass"></a> documentclass</h4>
+<ul>
+<li><code>\documentclass[a4paper, 12pt]&#123;article&#125;</code>,该代码说明是使用a4纸，字体为12pt的大小，同时article说明的是该文章的类型。</li>
+<li><code>\documentclass</code> 命令必须出现在每个 LaTeX 文档的开头。花括号内的文本指定了文档的类型。<strong>article</strong> 文档类型适合较短的文章，比如期刊文章和短篇报告。其他文档类型包括 <strong>report</strong>（适用于更长的多章节的文档，比如博士生论文），<strong>proc</strong>（会议论文集），<strong>book</strong> 和 <strong>beamer</strong>。方括号内的文本指定了一些选项——示例中它设置纸张大小为 A4，主要文字大小为 12pt。</li>
+</ul>
+<h4 id="usepackage"><a class="markdownIt-Anchor" href="#usepackage"></a> usepackage</h4>
+<ul>
+<li>引用一些包或者宏</li>
+<li>比如说：<code>\usepackage&#123;graphicx&#125;</code>是为了在LaTeX文档中插入图表引入的graphix包。</li>
+<li>又比如说：<code>\usepackage[colorlinks, linkcolor=black, anchorcolor=blue, citecolor=green]&#123;hyperref&#125;</code>是为了能够有超链接引入的包。</li>
+</ul>
+<h4 id="begindocument-enddocument"><a class="markdownIt-Anchor" href="#begindocument-enddocument"></a> begin{document} / end{document}</h4>
+<ul>
+<li><code>\begin&#123;document&#125;</code> 和 <code>\end&#123;document&#125;</code> 命令将你的文本内容包裹起来。任何在 <code>\begin&#123;documnet&#125;</code> 之前的文本都被视为前导命令，会影响整个文档。任何在 <code>\end&#123;document&#125;</code> 之后的文本都会被忽视</li>
+</ul>
+<h4 id="标题作者日期"><a class="markdownIt-Anchor" href="#标题作者日期"></a> 标题作者日期</h4>
+<ul>
+<li>
+<pre class="highlight"><code class="latex"><span class="hljs-keyword">\title</span>&#123;My First Document&#125;
+<span class="hljs-keyword">\author</span>&#123;My name&#125;
+<span class="hljs-keyword">\date</span>&#123;<span class="hljs-keyword">\today</span>&#125;
+<span class="hljs-keyword">\maketitle</span>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"><br>形成效果如下：<br><br>![image-20240708173430199](C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20240708173430199.png)<br><br>* `\maketitle` 命令可以给文档创建标题（如果去掉的话就没有标题了哦ovo）。你需要指定文档的标题。如果没有指定日期，就会使用现在的时间，作者是可选的。<br><br>#### 目录与标号<br><br>* ```latex<br>  \pagenumbering&#123;roman&#125;<br>  \tableofcontents<br>  \newpage<br>  \pagenumbering&#123;arabic&#125;<br></code></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+</ul>
+<p>形成效果如下：</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240708173650625.png" alt="image-20240708173650625" data-caption="image-20240708173650625" loading="lazy"></p>
+<ul>
+<li>使用 <code>\tableofcontents</code> 在文档中创建目录。</li>
+<li>页码可以使用 <code>\pagenumbering&#123;...&#125;</code> 在阿拉伯数字和罗马数字见切换。（上面这个写法就会导致，首页是罗马数字，而从第二页开始都是阿拉伯数字）</li>
+<li><code>\newpage</code> 命令会另起一个页面</li>
+</ul>
+<h4 id="章节"><a class="markdownIt-Anchor" href="#章节"></a> 章节</h4>
+<ul>
+<li>
+<p><code>\section&#123;...&#125;</code></p>
+</li>
+<li>
+<p><code>\subsection&#123;...&#125;</code></p>
+</li>
+<li>
+<p><code>\subsubsection&#123;...&#125;</code></p>
+</li>
+<li>
+<p><code>\paragraph&#123;...&#125;</code></p>
+</li>
+<li>
+<p><code>\subparagraph&#123;...&#125;</code></p>
+</li>
+<li>
+<pre class="highlight"><code class="latex"><span class="hljs-keyword">\section</span>&#123;Introduction&#125;
+This is the introduction.
+
+<span class="hljs-keyword">\section</span>&#123;Methods&#125;
+
+<span class="hljs-keyword">\subsection</span>&#123;Stage 1&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"><br>这个的呈现效果如下：<br><br>![image-20240708174301987](C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20240708174301987.png)<br><br>#### 创造标签<br><br>* 用 `\label&#123;labelname&#125;` 对章节创建标签。然后输入 `\ref&#123;labelname&#125;` 或者 `\pageref&#123;labelname&#125;` 来引用对应的章节。<br><br>* ```latex<br>  \subsection&#123;Stage 1&#125;<br>  \label&#123;sec1&#125; The first part of the methods. %这里创建了一个标签<br>  %...<br>  \section&#123;Results&#125;<br>  Here are my results.Referring to section \ref&#123;sec1&#125; on page \pageref&#123;sec1&#125;%这里我们对其进行了一个引用<br></code></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+</ul>
+<p>呈现效果如下：</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240708174526413.png" alt="image-20240708174526413" data-caption="image-20240708174526413" loading="lazy"></p>
+<h4 id="文字处理"><a class="markdownIt-Anchor" href="#文字处理"></a> 文字处理</h4>
+<ul>
+<li>
+<p>中文字体支持——最 <strong>简洁</strong> 的解决方案：使用 CTeX 宏包 <code>\usepackage[UTF8]&#123;ctex&#125;</code>.</p>
+</li>
+<li>
+<p>列表</p>
+<ul>
+<li>
+<p>LaTeX 支持两种类型的列表：有序列表（enumerate）和无序列表（itemize）。列表中的元素定义为 <code>\item</code>。列表可以有子列表。（和前端有点一样）</p>
+</li>
+<li>
+<pre class="highlight"><code class="latex"><span class="hljs-keyword">\begin</span>&#123;enumerate&#125;
+	<span class="hljs-keyword">\item</span>  First thing
+	
+	<span class="hljs-keyword">\item</span> Second thing
+		<span class="hljs-keyword">\begin</span>&#123;itemize&#125;
+			<span class="hljs-keyword">\item</span> A sub-thing 
+			
+			<span class="hljs-keyword">\item</span> Another sub-thing
+		<span class="hljs-keyword">\end</span>&#123;itemize&#125;
+	
+	<span class="hljs-keyword">\item</span> Third thing
+<span class="hljs-keyword">\end</span>&#123;enumerate&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"><br>    呈现效果如下：<br><br>    ![image-20240708174812383](C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20240708174812383.png)<br><br>* 其他省略，用到的时候再查。<br><br>#### 表格<br><br>* ```latex<br>  % |使之有显著的竖线<br>  \begin&#123;tabular&#125;&#123;|l|l|&#125;<br>      Apples &amp; Green \\<br>      Strawberries &amp; Red \\<br>      Orange &amp; Orange \\<br>  \end&#123;tabular&#125;<br>  <br>  % tabular命令用于排版表格<br>  \begin&#123;tabular&#125;&#123;rc&#125;<br>      \hline<br>      Apples &amp; Green \\<br>      \hline %表示插入一个贯穿所有列的横着的分割线<br>      Strawberries &amp; Red \\<br>      \cline&#123;1-1&#125; Orange &amp; Orange \\ % cline&#123;1-2&#125;表示在第一列和第二列插入一个横着的分割线<br>  \end&#123;tabular&#125;<br>  <br>  \begin&#123;tabular&#125;&#123;|r|l|&#125;<br>      \hline<br>      8		&amp; here&#x27;s \\<br>      \cline&#123;2-2&#125; 86 &amp; stuff \\<br>      \hline<br>      \hline<br>      2008	&amp; now \\<br>      \hline<br>  \end&#123;tabular&#125;<br>  <br>  \begin&#123;tabular&#125;&#123;|l|r|r|&#125;<br>      Item &amp; Quantity &amp; Price(\$)  \\		<br>      \hline<br>      Nails &amp; 500 &amp; 0.34 \\<br>      Wooden boards &amp; 100 &amp; 4.00\\<br>      Bricks &amp; 240 &amp; 11.50\\<br>  \end&#123;tabular&#125;<br></code></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<p>呈现效果如下：</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240708174931848.png" alt="image-20240708174931848" data-caption="image-20240708174931848" loading="lazy"></p>
+<ul>
+<li><code>\begin&#123;tabular&#125;&#123;...&#125;</code>(tabular命令用于排版表格)省略号会由定义表格的列的代码替换：
+<ul>
+<li><code>l</code> 表示一个左对齐的列；</li>
+<li><code>r</code> 表示一个右对齐的列；</li>
+<li><code>c</code> 表示一个向中对齐的列；</li>
+<li><code>|</code> 表示一个列的竖线；</li>
+<li>例如，<code>&#123;lll&#125;</code> 会生成一个三列的表格，并且保存向左对齐，没有显式的竖线；<code>&#123;|l|l|r|&#125;</code> 会生成一个三列表格，前两列左对齐，最后一列右对齐，并且相邻两列之间有显式的竖线。</li>
+</ul>
+</li>
+<li>表格的数据在 <code>\begin&#123;tabular&#125;</code> 后输入：
+<ul>
+<li><code>&amp;</code> 用于分割列；</li>
+<li><code>\\</code> 用于换行；</li>
+<li><code>\hline</code> 表示插入一个贯穿所有列的横着的分割线；</li>
+<li><code>\cline&#123;1-2&#125;</code> 会在第一列和第二列插入一个横着的分割线。</li>
+</ul>
+</li>
+<li>最后使用 <code>\end&#123;tabular&#125;</code> 结束表格.</li>
+</ul>
+<h4 id="图表"><a class="markdownIt-Anchor" href="#图表"></a> 图表</h4>
+<ul>
+<li>注意，图表如果使用相对路径的话，所要插入的图片应该放到和编写的latex文件在同一个目录下。就比如说，下面的实例中的<code>bfs.png</code>就是在同一个目录下的，如图。</li>
+</ul>
+<p>​	<img onerror="imgOnError(this);" data-fancybox="gallery" src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240708175246393.png" alt="image-20240708175246393" data-caption="image-20240708175246393" loading="lazy"></p>
+<ul>
+<li>
+<pre class="highlight"><code class="latex"><span class="hljs-comment">% 图表</span>
+<span class="hljs-keyword">\begin</span>&#123;figure&#125;[t]
+    <span class="hljs-keyword">\centering</span>
+    <span class="hljs-keyword">\includegraphics</span>[width=0.5<span class="hljs-keyword">\textwidth</span>]&#123;bfs.png&#125;
+    <span class="hljs-keyword">\caption</span>&#123;Here is my image&#125;
+    <span class="hljs-keyword">\label</span>&#123;image-myimage&#125;
+<span class="hljs-keyword">\end</span>&#123;figure&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"><br>​	呈现效果如下：<br><br>​	![image-20240708175420429](C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20240708175420429.png)<br><br>* `[t]` 是位置参数，**h** 表示把图表近似地放置在这里（如果能放得下）。有其他的选项：**t** 表示放在在页面顶端；**b** 表示放在在页面的底端；**p** 表示另起一页放置图表。你也可以添加一个 **!** 参数来强制放在参数指定的位置（尽管这样排版的效果可能不太好）。<br>* `\centering` 将图片放置在页面的中央。如果没有该命令会默认左对齐。使用它的效果是很好的，因为图表的标题也是居中对齐的。<br>* `\includegraphics&#123;...&#125;` 命令可以自动将图放置到你的文档中，图片文件应当与 TeX 文件放在同一目录下。<br>* `[width=1\textwidth]` 是一个可选的参数，它指定图片的宽度——与文本的宽度相同。宽度也可以以厘米为单位。你也可以使用 `[scale=0.5]` 将图片按比例缩小（示例相当于缩小一半）。<br>* `\caption&#123;...&#125;` 定义了图表的标题。如果使用了它，LaTeX 会给你的图表添加「Figure」开头的序号。你可以使用 `\listoffigures` 来生成一个图表的目录。<br>* `\label&#123;...&#125;` 创建了一个可以供你引用的标签。<br><br>#### 公式<br><br>* 可以使用一对 `$` 来启用数学模式，这可以用于撰写行内数学公式。例如 `$1+2=3$` 的生成效果是 $1+2=3$。(markdown里就是沿用latex的公式的哦！)<br><br>* 如果你想要行间的公式，可以使用 `$$...$$`（现在我们推荐使用 `\[...\]`，因为前者可能产生不良间距）。例如，`$$1+2=3$$` 的生产效果为<br><br>$$<br>1+2=3<br>$$<br><br>* 如果是生成带标号的公式，可以使用 `\begin&#123;equation&#125;...\end&#123;equation&#125;`。例如：<br><br>  ```latex<br>  \begin&#123;equation&#125;<br>    1+2=3<br>  \end&#123;equation&#125;<br></code></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+<li>
+<p>使用 <code>\begin&#123;eqnarray&#125;...\end&#123;eqnarray&#125;</code> 来撰写一组带标号的公式。</p>
+</li>
+<li>
+<p>数学符号这边就不记啦！不记得的请自己搜！</p>
+</li>
+</ul>
+<h4 id="参考文献"><a class="markdownIt-Anchor" href="#参考文献"></a> 参考文献</h4>
+<ul>
+<li>
+<p>首先要在同样的目录下创建一个bib类型文件。</p>
+</li>
+<li>
+<p>在bib类型文件中写类似下面的内容（在一些论文网站上一般能够直接复制。）</p>
+<ul>
+<li>
+<pre class="highlight"><code class="latex">@article&#123;
+    Birdetal2001,
+    Author = &#123;Bird, R. B. and Smith, E. A. and Bird, D. W.&#125;,
+    Title = &#123;The hunting handicap: costly signaling in human foraging strategies&#125;,
+    Journal = &#123;Behavioral Ecology and Sociobiology&#125;,
+    Volume = &#123;50&#125;,
+    Pages = &#123;9-19&#125;,
+    Year = &#123;2001&#125; 
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plaintext"><br>* 然后插入文献列表<br><br>  * ```latex<br>    \bibliographystyle&#123;plain&#125;<br>    \bibliography&#123;references&#125;<br></code></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+<li>
+<p>参考文献写在 <code>references.bib</code> 里。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>参考文献标注</p>
+<ul>
+<li>使用 <code>\cite&#123;citationkey&#125;</code> 来在你想要引用文献的地方插入一个标注。</li>
+<li>例如上面的一个参考文献名称为Birdetal2001，那么可以使用<code>\cite&#123;Birdetal2001&#125;</code>进行标注引用。</li>
+</ul>
+</li>
+</ul>
+
+    <p>今天大概也在努力吧~o(*￣▽￣*)ブ</p>
+
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>YXF<br>
+        <strong>本文链接：</strong><a href="https://yxf203.github.io/2024/07/10/%E5%B0%9D%E8%AF%95LaTeX%E5%85%A5%E9%97%A8/" title="https:&#x2F;&#x2F;yxf203.github.io&#x2F;2024&#x2F;07&#x2F;10&#x2F;%E5%B0%9D%E8%AF%95LaTeX%E5%85%A5%E9%97%A8&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;yxf203.github.io&#x2F;2024&#x2F;07&#x2F;10&#x2F;%E5%B0%9D%E8%AF%95LaTeX%E5%85%A5%E9%97%A8&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/LaTeX/" rel="tag">LaTeX</a>
+    
+</div>
+  
+  
+    <script async src="/js/copy-codeblock.js?v=1720582930418"></script>
+  
+
+  
+      <div class="nexmoe-post-footer">
+          
+      </div>
+  
+</div></div><div class="nexmoe-post-right">    <div class="nexmoe-fixed">
+        <div class="nexmoe-tool">
+
+            
+
+            
+            
+            <button class="mdui-fab catalog" style="overflow:unset;">
+                <i class="nexmoefont icon-i-catalog"></i>
+                <div class="nexmoe-toc">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%91%E8%A1%8C%E7%89%88"><span class="toc-number">1.</span> <span class="toc-text"> 发行版</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E8%AE%B0%E5%BD%95"><span class="toc-number">2.</span> <span class="toc-text"> 一些记录</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#documentclass"><span class="toc-number">2.1.</span> <span class="toc-text"> documentclass</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#usepackage"><span class="toc-number">2.2.</span> <span class="toc-text"> usepackage</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#begindocument-enddocument"><span class="toc-number">2.3.</span> <span class="toc-text"> begin{document} &#x2F; end{document}</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%87%E9%A2%98%E4%BD%9C%E8%80%85%E6%97%A5%E6%9C%9F"><span class="toc-number">2.4.</span> <span class="toc-text"> 标题作者日期</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AB%A0%E8%8A%82"><span class="toc-number">2.5.</span> <span class="toc-text"> 章节</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E5%AD%97%E5%A4%84%E7%90%86"><span class="toc-number">2.6.</span> <span class="toc-text"> 文字处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE%E8%A1%A8"><span class="toc-number">2.7.</span> <span class="toc-text"> 图表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">2.8.</span> <span class="toc-text"> 参考文献</span></a></li></ol></li></ol>
+                </div>
+            </button>
+            
+
+            
+
+            <a href="#nexmoe-content" class="backtop toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+        </div>
+    </div>
+</div></div><div id="nexmoe-footer"><!--!--></div><div id="nexmoe-search-space"><div class="search-container"><div class="search-header"><div class="search-input-container"><input class="search-input" type="text" placeholder="搜索" onInput="sinput();"></div><a class="search-close" onclick="sclose();">×</a></div><div class="search-body"></div></div></div><div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2058306854838448" crossorigin="anonymous"></script>
+</div></body></html>
