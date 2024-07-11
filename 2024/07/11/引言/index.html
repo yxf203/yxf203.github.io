@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="zh"><head>
+<title>引言 - fff从零开始的博客OvO</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta name="description" content="虽然之前也看过一些，但是到现在已经过去了好久了，期间也没再看过这本书。 李沐大神的《动手学深度学习》的评价一直都很高，但是内容真的好多。 希望这次能努力坚持着多学一点内容。 那么！ff的从零开始学习！启动！   机器学习（machine learning，ML）是一类强大的可以从经验中学习的技术.   只需要定义一个灵活的程序算法，其输出由许多参数（parameter）决定，然后使用数据集来确定当">
+<meta property="og:type" content="article">
+<meta property="og:title" content="引言">
+<meta property="og:url" content="https://yxf203.github.io/2024/07/11/%E5%BC%95%E8%A8%80/index.html">
+<meta property="og:site_name" content="fff从零开始的博客OvO">
+<meta property="og:description" content="虽然之前也看过一些，但是到现在已经过去了好久了，期间也没再看过这本书。 李沐大神的《动手学深度学习》的评价一直都很高，但是内容真的好多。 希望这次能努力坚持着多学一点内容。 那么！ff的从零开始学习！启动！   机器学习（machine learning，ML）是一类强大的可以从经验中学习的技术.   只需要定义一个灵活的程序算法，其输出由许多参数（parameter）决定，然后使用数据集来确定当">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-11T11:14:39.000Z">
+<meta property="article:modified_time" content="2024-07-11T11:14:39.577Z">
+<meta property="article:author" content="YXF">
+<meta property="article:tag" content="动手学深度学习">
+<meta name="twitter:card" content="summary">
+
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1720696484453">
+
+<link rel="stylesheet" href="/css/style.css?v=1720696484453">
+
+
+
+
+    
+        <link rel="stylesheet" href="/custom.css?v=1720696484453">
+    
+
+
+
+<script src="/lib/mdui_043tiny/mdui.js" async></script>
+<script src="/lib/fancybox/fancybox.umd.js" async></script>
+<script src="/lib/lax.min.js" async></script>
+
+
+<script async src="/js/app.js?v=1720696484453"></script>
+
+ 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4D4ZJ9G024"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+
+  gtag("config", "G-4D4ZJ9G024");
+</script>
+
+
+<link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+<meta name="generator" content="Hexo 6.3.0"></head><body class="nexmoe mdui-drawer-body-left"><div id="nexmoe-background"><div class="nexmoe-bg" style="background-image: url(/../../images/bcg.png)"></div><div class="mdui-appbar mdui-shadow-0"><div class="mdui-toolbar"><a class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target: &#039;#drawer&#039;, swipe: true}" title="menu"><i class="mdui-icon nexmoefont icon-menu"></i></a><div class="mdui-toolbar-spacer"></div><a class="mdui-btn mdui-btn-icon" href="/" title="YXF"><img src="/../../images/avatar.jpg" alt="YXF"></a></div></div></div><div id="nexmoe-header"><div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="YXF">
+            <img src="/../../images/avatar.jpg" alt="YXF" alt="YXF">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>13</div>
+        <div><span>标签</span>10</div>
+        <div><span>分类</span>4</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+    </div>
+    
+    
+        
+        
+        
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">13</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/07/11/%E5%BC%95%E8%A8%80/">引言</a>
+          </li>
+        
+          <li>
+            <a href="/2024/07/11/%E6%82%AC%E7%BA%BF%E6%B3%95/">悬线法</a>
+          </li>
+        
+          <li>
+            <a href="/2024/07/10/%E5%8D%95%E8%B0%83%E6%A0%88/">单调栈</a>
+          </li>
+        
+          <li>
+            <a href="/2024/07/07/%E6%B4%9B%E8%B0%B7P1638%E9%80%9B%E7%94%BB%E5%B1%95/">洛谷P1638逛画展</a>
+          </li>
+        
+          <li>
+            <a href="/2024/07/07/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/">踩坑记录</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+   
+    <div class="nexmoe-copyright">
+        &copy; 2024 YXF
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer --></div><div id="nexmoe-content"><div class="nexmoe-primary"><div class="nexmoe-post">
+  <article>
+    
+        <div class="nexmoe-post-cover"> 
+            <img src="/../../images/bcg.png" alt="引言" loading="lazy">
+            <h1>引言</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2024年07月11日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+        
+        
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+    <p>虽然之前也看过一些，但是到现在已经过去了好久了，期间也没再看过这本书。<br />
+李沐大神的《动手学深度学习》的评价一直都很高，但是内容真的好多。<br />
+希望这次能努力坚持着多学一点内容。<br />
+那么！ff的从零开始学习！启动！</p>
+<ul>
+<li>
+<p>机器学习（machine learning，ML）是一类强大的可以从经验中学习的技术.</p>
+</li>
+<li>
+<p>只需要定义一个灵活的程序算法，其输出由许多参数（parameter）决定，然后使用数据集来确定当下的“最佳参数集”.</p>
+</li>
+<li>
+<p>任一调整参数后的程序被称为模型（model）。</p>
+</li>
+<li>
+<p>使用数据集来选择参数的元程序被称为学习算法（learning algorithm）。</p>
+</li>
+<li>
+<p>深度学习与经典方法的区别主要在于：前者关注的功能强大的模型，这些模型由<strong>神经网络</strong>错综复杂的交织在一起，包含<strong>层层数据转换</strong>，因此被称为深度学习（deep learning）。</p>
+</li>
+<li>
+<p>机器学习中的关键组件</p>
+<ul>
+<li>可以用来学习的数据(当每个样本的特征类别数量都是相同的时候，其特征向量是固定长度的，这个长度被称为数据的维数（di‐mensionality）。)</li>
+<li>如何转换数据的模型</li>
+<li>一个目标函数，用来量化模型的有效性（目标函数：定义模型的优劣程度的度量，这个度量在大多数情况可视化。因为我们通常定义一个目标函数并希望其越低越好，所以又是又称他们为损失函数（loss function ,or cost function.））.</li>
+<li>调整模型参数以优化目标函数的算法</li>
+</ul>
+</li>
+<li>
+<p>监督学习：在给定输入特征（输入和相应的特征构成数据集）的情况下预测标签。</p>
+<ul>
+<li>回归：标签是一个数值。</li>
+<li>分类：解决“哪一个”的问题。</li>
+<li>标签：使机器能够描绘，一个事物可能有多个标签。</li>
+<li>搜索（首先为集合中的每个元素分配相应的相关性分数，然后检索评级最高的元素。）如今，搜索引擎使用机器学习和用户行为模型来获取网页相关性得分。</li>
+<li>推荐系统</li>
+<li>序列学习：使机器具有“记忆”功能</li>
+</ul>
+</li>
+<li>
+<p>无监督学习（不含有“目标”）</p>
+<ul>
+<li>聚类（clustering）问题：没有标签的情况下</li>
+<li>主成分分析（principal component analysis）问题：找到少量的参数来准确地捕捉数据的线性相关属性</li>
+<li>因果关系（causality）和概率图模型（probabilistic graphical models）问题：根本原因，根据经验数据发现它们之间的关系。</li>
+<li>生成对抗性网络（generative adversarial networks）: 合成数据的方法。</li>
+</ul>
+</li>
+<li>
+<p>与环境互动</p>
+<ul>
+<li>监督学习和无监督学习都是一种离线学习，因为他们利用从环境中得到的数据，在与环境断开的情况下，孤立地进行模式识别。但是，这也决定了他们解决问题的局限性和有限性。</li>
+<li>而与真实环境互动则可能会去影响环境。这样的人工智能就是一种智能代理而不是预测模型了。</li>
+</ul>
+</li>
+<li>
+<p>强化学习（为了产生一个好的策略）</p>
+<ul>
+<li>必须处理学分分配（credit assignment）问题</li>
+</ul>
+</li>
+</ul>
+<p>大概粗略地把引言看了一看，怎么说呢，突然感觉好像也并没有那么糟糕。</p>
+<p>看到自动驾驶汽车，看到Alphago胜利的例子，发现原来以前觉得遥不可及的东西我也在慢慢地接近，尽管依旧路漫漫其修远兮。好像到今为止大家都在抨击AI（这就不详细区分到底是机器学习还是什么部分啦），但是实际的生活中的变化却也在切切实实地证明着，这个领域有其独到之处，也在努力地推动人们生活或者其它领域的发展。这样子想着，好像不管是做理论也好还是做应用也好对我而言都是有意义的。或许我的理论确实微不足道，但是也正是很多微不足道的理论才促进了最后宏伟理论地产生。毕竟，是时势造英雄啊。</p>
+<p>关于练习这一部分，看到第一个！</p>
+<blockquote>
+<p>你当前正在编写的代码的哪些部分可以“学习”，即通过学习和自动确定代码中所做的设计选择来改进？你的代码是否包含启发式设计选择？</p>
+</blockquote>
+<p>这个确确实实已经在pycharm或者IDEAJ等编译器里投入实际应用了，我觉得也是辅助大家写代码的一步把。</p>
+<p>然后这边的概念<code>端到端的训练方法</code>我还是不太理解，这边先mark一下，希望之后看到的时候能够想起来！</p>
+
+    <p>今天大概也在努力吧~o(*￣▽￣*)ブ</p>
+
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>YXF<br>
+        <strong>本文链接：</strong><a href="https://yxf203.github.io/2024/07/11/%E5%BC%95%E8%A8%80/" title="https:&#x2F;&#x2F;yxf203.github.io&#x2F;2024&#x2F;07&#x2F;11&#x2F;%E5%BC%95%E8%A8%80&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;yxf203.github.io&#x2F;2024&#x2F;07&#x2F;11&#x2F;%E5%BC%95%E8%A8%80&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E5%8A%A8%E6%89%8B%E5%AD%A6%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">动手学深度学习</a>
+    
+</div>
+  
+  
+    <script async src="/js/copy-codeblock.js?v=1720696484427"></script>
+  
+
+  
+      <div class="nexmoe-post-footer">
+          
+      </div>
+  
+</div></div><div class="nexmoe-post-right">    <div class="nexmoe-fixed">
+        <div class="nexmoe-tool">
+
+            
+
+            
+            
+
+            
+
+            <a href="#nexmoe-content" class="backtop toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+        </div>
+    </div>
+</div></div><div id="nexmoe-footer"><!--!--></div><div id="nexmoe-search-space"><div class="search-container"><div class="search-header"><div class="search-input-container"><input class="search-input" type="text" placeholder="搜索" onInput="sinput();"></div><a class="search-close" onclick="sclose();">×</a></div><div class="search-body"></div></div></div><div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2058306854838448" crossorigin="anonymous"></script>
+</div></body></html>
