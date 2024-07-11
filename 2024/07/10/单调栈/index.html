@@ -13,25 +13,28 @@
 <meta property="og:site_name" content="fff从零开始的博客OvO">
 <meta property="og:description" content="昨天感觉情绪很糟糕 然后就偷偷摸鱼啦，今天才来补这个。   单调栈 因为做题的时候遇到了，看了一眼题解发现是单调栈，但是并不了解这个内容。 然后大致了解了一下，单调栈本身还是比较容易理解的，就是始终维持着栈（或者数组）为一个单调递增或者单调递减的性质。 以单调递增为例，如果要入栈的数比栈中最后的元素大，则直接入栈；如果要入栈的数比栈中最后的元素小，则持续弹栈，知道栈为空或者栈中最后一个元素小于要">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240711104508828.png">
+<meta property="og:image" content="c:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240711105430764.png">
 <meta property="article:published_time" content="2024-07-10T03:41:33.000Z">
-<meta property="article:modified_time" content="2024-07-10T03:41:33.958Z">
+<meta property="article:modified_time" content="2024-07-11T02:58:25.285Z">
 <meta property="article:author" content="YXF">
 <meta property="article:tag" content="单调栈">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240711104508828.png">
 
 <link rel="stylesheet" href="/lib/fancybox/fancybox.css">
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1720582930440">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1720673385842">
 
-<link rel="stylesheet" href="/css/style.css?v=1720582930440">
+<link rel="stylesheet" href="/css/style.css?v=1720673385842">
 
 
 
 
     
-        <link rel="stylesheet" href="/custom.css?v=1720582930440">
+        <link rel="stylesheet" href="/custom.css?v=1720673385842">
     
 
 
@@ -41,7 +44,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1720582930441"></script>
+<script async src="/js/app.js?v=1720673385842"></script>
 
  
 
@@ -64,7 +67,7 @@
         </a>
     </div>
     <div class="nexmoe-count">
-        <div><span>文章</span>12</div>
+        <div><span>文章</span>13</div>
         <div><span>标签</span>10</div>
         <div><span>分类</span>4</div>
     </div>
@@ -95,7 +98,7 @@
   <div class="nexmoe-widget-wrap">
     <h3 class="nexmoe-widget-title">文章归档</h3>
     <div class="nexmoe-widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">12</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">13</span></li></ul>
     </div>
   </div>
 
@@ -108,6 +111,10 @@
     <h3 class="nexmoe-widget-title">最新文章</h3>
     <div class="nexmoe-widget">
       <ul>
+        
+          <li>
+            <a href="/2024/07/11/%E6%82%AC%E7%BA%BF%E6%B3%95/">悬线法</a>
+          </li>
         
           <li>
             <a href="/2024/07/10/%E5%B0%9D%E8%AF%95LaTeX%E5%85%A5%E9%97%A8/">尝试LaTeX入门</a>
@@ -123,10 +130,6 @@
         
           <li>
             <a href="/2024/07/07/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/">踩坑记录</a>
-          </li>
-        
-          <li>
-            <a href="/2024/06/28/%E6%AF%9B%E6%A6%82%E5%A4%8D%E4%B9%A0/">毛概复习</a>
           </li>
         
       </ul>
@@ -177,6 +180,28 @@
 <h3 id="题目1"><a class="markdownIt-Anchor" href="#题目1"></a> 题目1</h3>
 <p>先贴相应题目1：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4147">https://www.luogu.com.cn/problem/P4147</a><br />
 ↑这个题目好难，我学不会，之后再来补题解。</p>
+<p>好啦！A出来了！感谢题解感谢pink！呜呜呜终于！</p>
+<p>这个题目如果使用单调栈的话，其实就是主要要推演一个过程。</p>
+<p>那么我们可以想到的，使用单调栈去推演，分为以下几种情况：</p>
+<ol>
+<li>要加入的元素比栈末尾元素大，那么我们直接入栈。</li>
+<li>要加入的元素比栈末尾元素小，那么我们先弹栈再入栈。</li>
+</ol>
+<p>但是，我们怎么更新呢？（感觉这个就是这题一个很重要的点，是要在弹栈的时候更新！呜呜呜题解和pink也太机智了！）</p>
+<ol>
+<li>针对第一种情况，直接入栈，但为了方便之后的计算，我们应该要除了高度以外还记录能够以该柱子为边最多的柱子数目（我们可以姑且认为是举行的宽度！），如图！</li>
+</ol>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240711104508828.png" alt="image-20240711104508828" data-caption="image-20240711104508828" loading="lazy"></p>
+<p>​	然后呢，因为直接入栈的时候说明前面的都比他矮呢！！矮呢！！所以我们把其宽度先设置为1.</p>
+<ol start="2">
+<li>针对第二种情况，先弹栈再入栈。</li>
+</ol>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20240711105430764.png" alt="image-20240711105430764" data-caption="image-20240711105430764" loading="lazy"></p>
+<p>​	然后最后如果结束了，还需要把所有的都弹出来！弹栈的过程中进行更新！</p>
+<p>感觉这个题目很大一个重点在于能够自己推演这个过程！脑子乱乱的可不行！</p>
+<p>一集像1，2两种情况在代码中当然是可以合并的！（顺便吐槽一下自己总是多写不必要的代码的坏毛病！希望能改过来！</p>
+<p>下面是AC代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">char</span> a[<span class="hljs-number">1010</span>][<span class="hljs-number">1010</span>];<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">node</span>&#123;<br>	<span class="hljs-type">int</span> w;<br>	<span class="hljs-type">int</span> h;<br>&#125;;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-type">int</span> n, m, i, j, max_n = <span class="hljs-number">0</span>, temp;<br>	<span class="hljs-type">int</span> count[<span class="hljs-number">1010</span>][<span class="hljs-number">1010</span>]; <br>	stack&lt;node&gt; s;<br>	<span class="hljs-built_in">memset</span>(count, <span class="hljs-number">0</span>, <span class="hljs-built_in">sizeof</span>(count));<br>	cin&gt;&gt;n&gt;&gt;m;<br>	<span class="hljs-keyword">for</span>(i = <span class="hljs-number">1</span>; i &lt;= n; i++)&#123;<br>		<span class="hljs-keyword">for</span>(j = <span class="hljs-number">1</span>; j &lt;= m; j++)&#123;<br>			cin&gt;&gt;a[i][j];<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">for</span>(i = <span class="hljs-number">1</span>; i &lt;= n; i++)&#123;<br>		<span class="hljs-keyword">for</span>(j = <span class="hljs-number">1</span>; j &lt;= m; j++)&#123;<br>			count[i][j] = <span class="hljs-number">0</span>;<br>			<span class="hljs-keyword">if</span>(a[i][j] == <span class="hljs-string">&#x27;F&#x27;</span>) count[i][j] = count[i - <span class="hljs-number">1</span>][j] + <span class="hljs-number">1</span>;<br>		&#125;<br>		<span class="hljs-keyword">for</span>(j = <span class="hljs-number">1</span>; j &lt;= m; j++)&#123;<br>			temp = <span class="hljs-number">0</span>; <br>			node n;<br>			n.h = count[i][j];<br>			n.w = <span class="hljs-number">1</span>;<br>			<span class="hljs-keyword">while</span>(!s.<span class="hljs-built_in">empty</span>() &amp;&amp; s.<span class="hljs-built_in">top</span>().h &gt;= count[i][j])&#123;<br>				node t = s.<span class="hljs-built_in">top</span>();<br>				<span class="hljs-keyword">if</span>((t.w + temp) * t.h &gt; max_n) max_n = (t.w + temp) * t.h;<br>				temp += t.w;<br>				s.<span class="hljs-built_in">pop</span>();<br>			&#125;<br>			n.h = count[i][j];<br>			n.w = <span class="hljs-number">1</span> + temp;<br>			s.<span class="hljs-built_in">push</span>(n);<br>		&#125;<br>		temp = <span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">while</span>(!s.<span class="hljs-built_in">empty</span>())&#123;<br>			node t = s.<span class="hljs-built_in">top</span>();<br>			s.<span class="hljs-built_in">pop</span>();<br>			<span class="hljs-keyword">if</span>((t.w + temp) * t.h &gt; max_n) max_n = (t.w + temp) * t.h;<br>			temp += t.w;<br>		&#125;<br>	&#125;<br>	cout&lt;&lt;max_n * <span class="hljs-number">3</span>&lt;&lt;endl;<br>	<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="题目2"><a class="markdownIt-Anchor" href="#题目2"></a> 题目2</h3>
 <p>题目2：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2866">https://www.luogu.com.cn/problem/P2866</a></p>
 <p>这也是一个单调栈的题目（不过本蒟蒻看完题解自己推了一遍然后才发现）</p>
@@ -217,7 +242,7 @@
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1720582930418"></script>
+    <script async src="/js/copy-codeblock.js?v=1720673385793"></script>
   
 
   
