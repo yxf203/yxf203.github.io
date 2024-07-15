@@ -29,3 +29,8 @@
 article ul span {
     margin-right: 0;
 }
+li, p{
+    margin: 5px;
+    line-height: 1.6rem !important;
+
+}
