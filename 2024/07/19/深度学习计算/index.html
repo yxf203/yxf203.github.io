@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="zh"><head>
+<title>深度学习计算 - fff从零开始的博客OvO</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta name="description" content="层和块   单个神经网络（1）接受一些输入；（2）生成相应的标量输出；（3）具有一组相关 参数（parameters），更新这些参数可以优化某目标函数。   像单个神经元一样，层（1）接受一组输入，（2）生成相应的输出，（3）由一组可调整参数描述。   为了实现这些复杂的网络，我们引入了神经网络块的概念。块（block）可以描述单个层、由多个层组成的组件（即层组， groups of layer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习计算">
+<meta property="og:url" content="https://yxf203.github.io/2024/07/19/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%A1%E7%AE%97/index.html">
+<meta property="og:site_name" content="fff从零开始的博客OvO">
+<meta property="og:description" content="层和块   单个神经网络（1）接受一些输入；（2）生成相应的标量输出；（3）具有一组相关 参数（parameters），更新这些参数可以优化某目标函数。   像单个神经元一样，层（1）接受一组输入，（2）生成相应的输出，（3）由一组可调整参数描述。   为了实现这些复杂的网络，我们引入了神经网络块的概念。块（block）可以描述单个层、由多个层组成的组件（即层组， groups of layer">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-19T07:37:31.000Z">
+<meta property="article:modified_time" content="2024-07-19T07:37:31.444Z">
+<meta property="article:author" content="YXF">
+<meta property="article:tag" content="动手学深度学习">
+<meta name="twitter:card" content="summary">
+
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1721374718065">
+
+<link rel="stylesheet" href="/css/style.css?v=1721374718065">
+
+
+
+
+    
+        <link rel="stylesheet" href="/custom.css?v=1721374718065">
+    
+
+
+
+<script src="/lib/mdui_043tiny/mdui.js" async></script>
+<script src="/lib/fancybox/fancybox.umd.js" async></script>
+<script src="/lib/lax.min.js" async></script>
+
+
+<script async src="/js/app.js?v=1721374718065"></script>
+
+ 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4D4ZJ9G024"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+
+  gtag("config", "G-4D4ZJ9G024");
+</script>
+
+
+<link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+<meta name="generator" content="Hexo 6.3.0"></head><body class="nexmoe mdui-drawer-body-left"><div id="nexmoe-background"><div class="nexmoe-bg" style="background-image: url(/../../images/bcg.png)"></div><div class="mdui-appbar mdui-shadow-0"><div class="mdui-toolbar"><a class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target: &#039;#drawer&#039;, swipe: true}" title="menu"><i class="mdui-icon nexmoefont icon-menu"></i></a><div class="mdui-toolbar-spacer"></div><a class="mdui-btn mdui-btn-icon" href="/" title="YXF"><img src="/../../images/avatar.jpg" alt="YXF"></a></div></div></div><div id="nexmoe-header"><div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="YXF">
+            <img src="/../../images/avatar.jpg" alt="YXF" alt="YXF">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>17</div>
+        <div><span>标签</span>10</div>
+        <div><span>分类</span>4</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archive.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+    </div>
+    
+    
+        
+        
+        
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">17</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/07/19/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%A1%E7%AE%97/">深度学习计算</a>
+          </li>
+        
+          <li>
+            <a href="/2024/07/17/%E5%A4%9A%E5%B1%82%E6%84%9F%E7%9F%A5%E6%9C%BA/">多层感知机</a>
+          </li>
+        
+          <li>
+            <a href="/2024/07/15/%E7%BA%BF%E6%80%A7%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">线性神经网络</a>
+          </li>
+        
+          <li>
+            <a href="/2024/07/13/%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86/">预备知识</a>
+          </li>
+        
+          <li>
+            <a href="/2024/07/11/%E5%BC%95%E8%A8%80/">引言</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+   
+    <div class="nexmoe-copyright">
+        &copy; 2024 YXF
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer --></div><div id="nexmoe-content"><div class="nexmoe-primary"><div class="nexmoe-post">
+  <article>
+    
+        <div class="nexmoe-post-cover"> 
+            <img src="/../../images/bcg.png" alt="深度学习计算" loading="lazy">
+            <h1>深度学习计算</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2024年07月19日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+        
+        
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+    <h2 id="层和块"><a class="markdownIt-Anchor" href="#层和块"></a> 层和块</h2>
+<ul>
+<li>
+<p>单个神经网络（1）接受一些输入；（2）生成相应的标量输出；（3）具有一组相关 参数（parameters），更新这些参数可以优化某目标函数。</p>
+</li>
+<li>
+<p>像单个神经元一样，层（1）接受一组输入，（2）生成相应的输出，（3）由一组可调整参数描述。</p>
+</li>
+<li>
+<p>为了实现这些复杂的网络，我们引入了神经网络块的概念。<strong>块（block）可以描述单个层、由多个层组成的组件（即层组， groups of layers）或整个模型本身</strong>。使用块进行抽象的一个好处是可以将一些块组合成更大的组件，这一过程通常是递归的。</p>
+</li>
+<li>
+<p>块由类表示，其</p>
+<ul>
+<li>任何子类都必须定义一个将其输入转换为输出的前向传播函数，并且必须存储任何必需的参数。</li>
+<li>为了计算梯度，块必须具有反向传播函数。</li>
+<li>（块的功能还应有）根据需要初始化模型参数。</li>
+</ul>
+<p>但由于自动微分提供了反向传播的内容，因此我们只需要考虑前向传播函数和必须的参数。</p>
+</li>
+<li>
+<pre class="highlight"><code class="python"><span class="hljs-keyword">import</span> torch
+<span class="hljs-keyword">from</span> torch <span class="hljs-keyword">import</span> nn
+<span class="hljs-keyword">from</span> torch.nn <span class="hljs-keyword">import</span> functional <span class="hljs-keyword">as</span> F
+net = nn.Sequential(nn.Linear(<span class="hljs-number">20</span>, <span class="hljs-number">256</span>), nn.ReLU(), nn.Linear(<span class="hljs-number">256</span>, <span class="hljs-number">10</span>))
+X = torch.rand(<span class="hljs-number">2</span>, <span class="hljs-number">20</span>)
+<span class="hljs-built_in">print</span>(net(X))
+&lt;!--code￼<span class="hljs-number">0</span>--&gt;
+
+</code></pre>
+</li>
+<li>
+<p>块的一个主要优点是它的多功能性。我们可以子类化块以创建层（如全连接层的类）、整个模型（如上面的MLP类）或具有中等复杂度的各种组件。</p>
+</li>
+</ul>
+<h3 id="顺序块"><a class="markdownIt-Anchor" href="#顺序块"></a> 顺序块</h3>
+<ul>
+<li>简化的<code>MySequential</code>，我们只需要定义两个关键函数：
+<ul>
+<li>一种将块逐个追加到列表中的函数；</li>
+<li>一种前向传播函数，用于将输入按追加块的顺序传递给块组成的“链条”</li>
+</ul>
+</li>
+</ul>
+<h3 id="在前向传播函数中执行代码"><a class="markdownIt-Anchor" href="#在前向传播函数中执行代码"></a> 在前向传播函数中执行代码</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">FixedHiddenMLP</span>(nn.Module):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">super</span>().__init__()<br>        <span class="hljs-comment"># 不计算梯度的随机权重参数。因此其在训练期间保持不变</span><br>        <span class="hljs-variable language_">self</span>.rand_weight = torch.rand((<span class="hljs-number">20</span>, <span class="hljs-number">20</span>), requires_grad=<span class="hljs-literal">False</span>)<br>        <span class="hljs-variable language_">self</span>.linear = nn.Linear(<span class="hljs-number">20</span>, <span class="hljs-number">20</span>)<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">self, X</span>):<br>        X = <span class="hljs-variable language_">self</span>.linear(X)<br>        <span class="hljs-built_in">print</span>(X)<br>        <span class="hljs-comment"># 使用创建的常量参数以及relu和mm函数</span><br>        X = F.relu(torch.mm(X, <span class="hljs-variable language_">self</span>.rand_weight) + <span class="hljs-number">1</span>)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;relu:\n&quot;</span>, X)<br>        <span class="hljs-comment"># 复用全连接层。这相当于两个全连接层共享参数</span><br>        X = <span class="hljs-variable language_">self</span>.linear(X)<br>        <span class="hljs-built_in">print</span>(X.<span class="hljs-built_in">sum</span>())<br>        <span class="hljs-comment"># 控制流</span><br>        <span class="hljs-keyword">while</span> X.<span class="hljs-built_in">abs</span>().<span class="hljs-built_in">sum</span>() &gt; <span class="hljs-number">1</span>:<br>            X /= <span class="hljs-number">2</span><br>        <span class="hljs-keyword">return</span> X.<span class="hljs-built_in">sum</span>()<br>net = FixedHiddenMLP()<br><span class="hljs-built_in">print</span>(net(X))<br></code></pre></td></tr></table></figure>
+<ul>
+<li>在这个<code>FixedHiddenMLP</code>模型中，我们实现了一个隐藏层，其权重（<code>self.rand_weight</code>）在实例化时被随机初始化，之后为常量。这个权重不是一个模型参数，因此它永远不会被反向传播更新。然后，神经网络将这个固定层的输出通过一个全连接层。注意，在返回输出之前，模型做了一些不寻常的事情：它运行了一个while循环，在<em>L</em>1范数大于1的条件下，将输出向量除以2，直到它满足条件为止。最后，模型返回了X中所有项的和。注意，此操作可能不会常用于在任何实际任务中，我们只展示如何将任意代码集成到神经网络计算的流程中。</li>
+</ul>
+<h3 id="效率"><a class="markdownIt-Anchor" href="#效率"></a> 效率</h3>
+<ul>
+<li>全局解释器锁（Global Interpreter Lock，GIL）是 Python 中一个用于管理多线程的机制。它的存在是因为 Python 的内存管理并不是线程安全的。GIL 确保在任意时刻只有一个线程可以执行 Python 字节码，即使在多线程环境中。<strong>这意味着多线程 Python 程序实际上并不能真正并行执行 Python 代码</strong>，这对于 CPU 密集型任务来说是一个限制。</li>
+<li>在深度学习中，我们通常会使用 GPU 来加速计算。GPU 计算速度非常快，但它们需要通过 CPU 来管理和调度任务。如果 Python 代码运行在一个线程中，并且该线程被 GIL 锁定，那么即使 GPU 准备好处理任务，它也必须等待 GIL 被释放，从而导致性能瓶颈。</li>
+</ul>
+<h2 id="参数管理"><a class="markdownIt-Anchor" href="#参数管理"></a> 参数管理</h2>
+<h3 id="参数访问"><a class="markdownIt-Anchor" href="#参数访问"></a> 参数访问</h3>
+<ul>
+<li>
+<p>我们从已有模型中访问参数。当通过Sequential类定义模型时，我们可以通过索引来访问模型的任意层。这就像模型是一个列表一样，每层的参数都在其属性中。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">from</span> torch <span class="hljs-keyword">import</span> nn<br>net = nn.Sequential(nn.Linear(<span class="hljs-number">4</span>, <span class="hljs-number">8</span>), nn.ReLU(), nn.Linear(<span class="hljs-number">8</span>, <span class="hljs-number">1</span>))<br>X = torch.rand(size=(<span class="hljs-number">2</span>, <span class="hljs-number">4</span>))<br><span class="hljs-built_in">print</span>(net(X))<br><span class="hljs-built_in">print</span>(net[<span class="hljs-number">2</span>].state_dict())<br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p>输出的结果告诉我们一些重要的事情：首先，这个全连接层包含两个参数，分别是该层的<strong>权重(weight)<strong>和</strong>偏置(bias)</strong>。两者都存储为单精度浮点数（float32）。注意，参数名称允许唯一标识每个参数，即使在包含数百个层的网络中也是如此。</p>
+</li>
+</ul>
+<h4 id="目标参数"><a class="markdownIt-Anchor" href="#目标参数"></a> 目标参数</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 从第二个全连接层，即第三个神经网络层访问参数</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(net[<span class="hljs-number">2</span>].bias)) <span class="hljs-comment"># &lt;class &#x27;torch.nn.parameter.Parameter&#x27;&gt;</span><br><span class="hljs-built_in">print</span>(net[<span class="hljs-number">2</span>].bias) <span class="hljs-comment"># tensor([0.1640], requires_grad=True)</span><br><span class="hljs-built_in">print</span>(net[<span class="hljs-number">2</span>].bias.data) <span class="hljs-comment"># tensor([0.1640])</span><br><span class="hljs-built_in">print</span>(net[<span class="hljs-number">2</span>].weight.grad == <span class="hljs-literal">None</span>) <span class="hljs-comment"># 可以访问参数的梯度，此处因为没有调用反向传播，所以是None</span><br></code></pre></td></tr></table></figure>
+<h4 id="一次性访问所有参数"><a class="markdownIt-Anchor" href="#一次性访问所有参数"></a> 一次性访问所有参数</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(*[(name, param.shape) <span class="hljs-keyword">for</span> name, param <span class="hljs-keyword">in</span> net[<span class="hljs-number">0</span>].named_parameters()]) <span class="hljs-comment"># (&#x27;weight&#x27;, torch.Size([8, 4])) (&#x27;bias&#x27;, torch.Size([8]))</span><br><span class="hljs-built_in">print</span>(*[(name, param.shape) <span class="hljs-keyword">for</span> name, param <span class="hljs-keyword">in</span> net.named_parameters()]) <span class="hljs-comment"># (&#x27;0.weight&#x27;, torch.Size([8, 4])) (&#x27;0.bias&#x27;, torch.Size([8])) (&#x27;2.weight&#x27;, torch.Size([1, 8])) (&#x27;2.bias&#x27;, torch.Size([1]))</span><br><span class="hljs-comment"># 因此我们可以直接这样访问网络参数</span><br><span class="hljs-built_in">print</span>(net.state_dict()[<span class="hljs-string">&#x27;2.bias&#x27;</span>].data) <span class="hljs-comment"># tensor([-0.0206])</span><br></code></pre></td></tr></table></figure>
+<h4 id="从嵌套块收集参数"><a class="markdownIt-Anchor" href="#从嵌套块收集参数"></a> 从嵌套块收集参数</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">block1</span>():<br>    <span class="hljs-keyword">return</span> nn.Sequential(nn.Linear(<span class="hljs-number">4</span>, <span class="hljs-number">8</span>), nn.ReLU(),<br>                        nn.Linear(<span class="hljs-number">8</span>, <span class="hljs-number">4</span>), nn.ReLU())<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">block2</span>():<br>    net = nn.Sequential()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">4</span>):<br>    <span class="hljs-comment"># 在这里嵌套</span><br>        net.add_module(<span class="hljs-string">f&#x27;block <span class="hljs-subst">&#123;i&#125;</span>&#x27;</span>, block1())<br>    <span class="hljs-keyword">return</span> net<br>rgnet = nn.Sequential(block2(), nn.Linear(<span class="hljs-number">4</span>, <span class="hljs-number">1</span>))<br><span class="hljs-built_in">print</span>(rgnet(X))<br><span class="hljs-built_in">print</span>(rgnet)<br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">Sequential(</span><br><span class="hljs-string">  (0): Sequential(</span><br><span class="hljs-string">    (block 0): Sequential(</span><br><span class="hljs-string">      (0): Linear(in_features=4, out_features=8, bias=True)</span><br><span class="hljs-string">      (1): ReLU()</span><br><span class="hljs-string">      (2): Linear(in_features=8, out_features=4, bias=True)</span><br><span class="hljs-string">      (3): ReLU()</span><br><span class="hljs-string">    )</span><br><span class="hljs-string">    (block 1): Sequential(</span><br><span class="hljs-string">      (0): Linear(in_features=4, out_features=8, bias=True)</span><br><span class="hljs-string">      (1): ReLU()</span><br><span class="hljs-string">      (2): Linear(in_features=8, out_features=4, bias=True)</span><br><span class="hljs-string">      (3): ReLU()</span><br><span class="hljs-string">    )</span><br><span class="hljs-string">    (block 2): Sequential(</span><br><span class="hljs-string">      (0): Linear(in_features=4, out_features=8, bias=True)</span><br><span class="hljs-string">      (1): ReLU()</span><br><span class="hljs-string">      (2): Linear(in_features=8, out_features=4, bias=True)</span><br><span class="hljs-string">      (3): ReLU()</span><br><span class="hljs-string">    )</span><br><span class="hljs-string">    (block 3): Sequential(</span><br><span class="hljs-string">      (0): Linear(in_features=4, out_features=8, bias=True)</span><br><span class="hljs-string">      (1): ReLU()</span><br><span class="hljs-string">      (2): Linear(in_features=8, out_features=4, bias=True)</span><br><span class="hljs-string">      (3): ReLU()</span><br><span class="hljs-string">    )</span><br><span class="hljs-string">  )</span><br><span class="hljs-string">  (1): Linear(in_features=4, out_features=1, bias=True)</span><br><span class="hljs-string">)</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br><span class="hljs-comment"># 我们可以像这样访问其参数</span><br><span class="hljs-built_in">print</span>(rgnet[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>][<span class="hljs-number">0</span>].bias.data) <span class="hljs-comment"># tensor([ 0.1084, -0.1415, -0.0604,  0.1251,  0.3313,  0.4726,  0.4933,  0.0840])</span><br></code></pre></td></tr></table></figure>
+<h3 id="参数初始化"><a class="markdownIt-Anchor" href="#参数初始化"></a> 参数初始化</h3>
+<ul>
+<li>默认情况下，PyTorch会根据一个范围均匀地初始化权重和偏置矩阵，这个范围是根据输入和输出维度计算出的。PyTorch的<code>nn.init</code>模块提供了多种预置初始化方法。</li>
+</ul>
+<h4 id="内置初始化"><a class="markdownIt-Anchor" href="#内置初始化"></a> 内置初始化</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 将所有权重参数初始化为标准差为0.01的高斯随机变量，且将偏置参数设置为0</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">init_normal</span>(<span class="hljs-params">m</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(m) == nn.Linear:<br>        nn.init.normal_(m.weight, mean=<span class="hljs-number">0</span>, std=<span class="hljs-number">0.01</span>)<br>        nn.init.zeros_(m.bias)<br>net.apply(init_normal)<br><span class="hljs-built_in">print</span>(net[<span class="hljs-number">0</span>].weight.data[<span class="hljs-number">0</span>], net[<span class="hljs-number">0</span>].bias.data[<span class="hljs-number">0</span>]) <span class="hljs-comment"># tensor([ 0.0148,  0.0095,  0.0172, -0.0027]) tensor(0.)</span><br><br><span class="hljs-comment"># 将参数初始化给定常数</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">init_constant</span>(<span class="hljs-params">m</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(m) == nn.Linear:<br>        nn.init.constant_(m.weight, <span class="hljs-number">1</span>)<br>        nn.init.zeros_(m.bias)<br>net.apply(init_constant)<br><span class="hljs-built_in">print</span>(net[<span class="hljs-number">0</span>].weight.data[<span class="hljs-number">0</span>], net[<span class="hljs-number">0</span>].bias.data[<span class="hljs-number">0</span>]) <span class="hljs-comment"># tensor([1., 1., 1., 1.]) tensor(0.)</span><br><br><span class="hljs-comment"># 我们还可以对某些块应用不同的初始化方法。例如，下面我们使用Xavier初始化方法初始化第一个神经网络层，然后将第三个神经网络层初始化为常量值42。</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">init_xavier</span>(<span class="hljs-params">m</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(m) == nn.Linear:<br>        nn.init.xavier_uniform_(m.weight)<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">init_42</span>(<span class="hljs-params">m</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(m) == nn.Linear:<br>        nn.init.constant_(m.weight, <span class="hljs-number">42</span>)<br>net[<span class="hljs-number">0</span>].apply(init_xavier)<br>net[<span class="hljs-number">2</span>].apply(init_42)<br><span class="hljs-built_in">print</span>(net[<span class="hljs-number">0</span>].weight.data[<span class="hljs-number">0</span>]) <span class="hljs-comment"># tensor([-0.5635,  0.6420,  0.5877, -0.4320])</span><br><span class="hljs-built_in">print</span>(net[<span class="hljs-number">2</span>].weight.data) <span class="hljs-comment"># tensor([[42., 42., 42., 42., 42., 42., 42., 42.]])</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>nn.init.normal_()</code></li>
+<li><code>nn.init.constant_()</code></li>
+<li><code>nn.init.xavier_uniform_()</code></li>
+<li>以上这些都是内置的初始化函数</li>
+</ul>
+<h4 id="自定义初始化"><a class="markdownIt-Anchor" href="#自定义初始化"></a> 自定义初始化</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">my_init</span>(<span class="hljs-params">m</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(m) == nn.Linear:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Init&quot;</span>, *[(name, param.shape)<br>                        <span class="hljs-keyword">for</span> name, param <span class="hljs-keyword">in</span> m.named_parameters()][<span class="hljs-number">0</span>])<br>        nn.init.uniform_(m.weight, -<span class="hljs-number">10</span>, <span class="hljs-number">10</span>) <span class="hljs-comment"># U~(-10, 10)</span><br>        m.weight.data *= m.weight.data.<span class="hljs-built_in">abs</span>() &gt;= <span class="hljs-number">5</span><br>net.apply(my_init)<br><span class="hljs-built_in">print</span>(net[<span class="hljs-number">0</span>].weight)<br><span class="hljs-comment"># 最终可以直接设置参数</span><br>net[<span class="hljs-number">0</span>].weight.data[:] += <span class="hljs-number">1</span><br>net[<span class="hljs-number">0</span>].weight.data[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>] = <span class="hljs-number">42</span><br><span class="hljs-built_in">print</span>(net[<span class="hljs-number">0</span>].weight.data[<span class="hljs-number">0</span>])<br></code></pre></td></tr></table></figure>
+<h3 id="参数绑定"><a class="markdownIt-Anchor" href="#参数绑定"></a> 参数绑定</h3>
+<ul>
+<li>有时我们希望在多个层间共享参数：我们可以定义一个稠密层，然后使用它的参数来设置另一个层的参数。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 我们需要给共享层一个名称，以便可以引用它的参数</span><br>shared = nn.Linear(<span class="hljs-number">8</span>, <span class="hljs-number">8</span>)<br>net = nn.Sequential(nn.Linear(<span class="hljs-number">4</span>, <span class="hljs-number">8</span>), nn.ReLU(),<br>                    shared, nn.ReLU(),<br>                    shared, nn.ReLU(),<br>                    nn.Linear(<span class="hljs-number">8</span>, <span class="hljs-number">1</span>))<br>net(X)<br><span class="hljs-comment"># 检查参数是否相同</span><br><span class="hljs-built_in">print</span>(net[<span class="hljs-number">2</span>].weight.data[<span class="hljs-number">0</span>] == net[<span class="hljs-number">4</span>].weight.data[<span class="hljs-number">0</span>]) <span class="hljs-comment"># tensor([True, True, True, True, True, True, True, True])</span><br>net[<span class="hljs-number">2</span>].weight.data[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>] = <span class="hljs-number">100</span><br><span class="hljs-comment"># 确保它们实际上是同一个对象，而不只是有相同的值</span><br><span class="hljs-built_in">print</span>(net[<span class="hljs-number">2</span>].weight.data[<span class="hljs-number">0</span>] == net[<span class="hljs-number">4</span>].weight.data[<span class="hljs-number">0</span>]) <span class="hljs-comment"># tensor([True, True, True, True, True, True, True, True])</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>当参数绑定时，梯度会发生什么情况？
+<ul>
+<li>由于模型参数包含梯度，因此在反向传播期间第二个隐藏层（即第三个神经网络层）和第三个隐藏层（即第五个神经网络层）的梯度会加在一起。</li>
+</ul>
+</li>
+</ul>
+<h2 id="延后初始化"><a class="markdownIt-Anchor" href="#延后初始化"></a> 延后初始化</h2>
+<ul>
+<li><strong>延后初始化（defers initialization）</strong>，即直到数据第一次通过模型传递时，框架才会<strong>动态地推断</strong>出每个层的大小。</li>
+</ul>
+<h2 id="自定义层"><a class="markdownIt-Anchor" href="#自定义层"></a> 自定义层</h2>
+<h3 id="不带参数的层"><a class="markdownIt-Anchor" href="#不带参数的层"></a> 不带参数的层</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F<br><span class="hljs-keyword">from</span> torch <span class="hljs-keyword">import</span> nn<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">CenteredLayer</span>(nn.Module):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">super</span>().__init__()<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">self, X</span>):<br>        <span class="hljs-keyword">return</span> X - X.mean()<br>layer = CenteredLayer()<br><span class="hljs-built_in">print</span>(layer(torch.FloatTensor([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>])))<br>net = nn.Sequential(nn.Linear(<span class="hljs-number">8</span>, <span class="hljs-number">128</span>), CenteredLayer())<br>Y = net(torch.rand(<span class="hljs-number">4</span>, <span class="hljs-number">8</span>))<br><span class="hljs-built_in">print</span>(Y.mean())<br></code></pre></td></tr></table></figure>
+<h3 id="带参数的层"><a class="markdownIt-Anchor" href="#带参数的层"></a> 带参数的层</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 这些自定义层注意都是继承自nn.Module</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyLinear</span>(nn.Module):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, in_units, units</span>):<br>        <span class="hljs-built_in">super</span>().__init__()<br>        <span class="hljs-variable language_">self</span>.weight = nn.Parameter(torch.randn(in_units, units))<br>        <span class="hljs-variable language_">self</span>.bias = nn.Parameter(torch.randn(units,))<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">self, X</span>):<br>        linear = torch.matmul(X, <span class="hljs-variable language_">self</span>.weight.data) + <span class="hljs-variable language_">self</span>.bias.data<br>        <span class="hljs-keyword">return</span> F.relu(linear)<br>    <br>linear = MyLinear(<span class="hljs-number">5</span>, <span class="hljs-number">3</span>)<br><span class="hljs-built_in">print</span>(linear.weight)<br><span class="hljs-built_in">print</span>(linear(torch.rand(<span class="hljs-number">2</span>, <span class="hljs-number">5</span>)))<br><span class="hljs-comment"># 可以想使用内置的函数一样使用自定义层</span><br>net = nn.Sequential(MyLinear(<span class="hljs-number">64</span>, <span class="hljs-number">8</span>), MyLinear(<span class="hljs-number">8</span>, <span class="hljs-number">1</span>))<br><span class="hljs-built_in">print</span>(net(torch.rand(<span class="hljs-number">2</span>, <span class="hljs-number">64</span>)))<br></code></pre></td></tr></table></figure>
+<h2 id="读写文件"><a class="markdownIt-Anchor" href="#读写文件"></a> 读写文件</h2>
+<h3 id="加载和保存张量"><a class="markdownIt-Anchor" href="#加载和保存张量"></a> 加载和保存张量</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">from</span> torch <span class="hljs-keyword">import</span> nn<br><span class="hljs-keyword">from</span> torch.nn <span class="hljs-keyword">import</span> functional <span class="hljs-keyword">as</span> F<br>x = torch.arange(<span class="hljs-number">4</span>)<br><span class="hljs-comment"># 把要保存的变量作为输入</span><br>torch.save(x, <span class="hljs-string">&#x27;x-file&#x27;</span>)<br><span class="hljs-comment"># 读回数据</span><br>x2 = torch.load(<span class="hljs-string">&#x27;x-file&#x27;</span>)<br><span class="hljs-built_in">print</span>(x2)<br>y = torch.zeros(<span class="hljs-number">4</span>)<br><span class="hljs-comment"># save相当于&#x27;w&#x27; 是直接覆盖，而不是追加</span><br>torch.save([x, y],<span class="hljs-string">&#x27;x-files&#x27;</span>)<br>x2, y2 = torch.load(<span class="hljs-string">&#x27;x-files&#x27;</span>)<br><span class="hljs-built_in">print</span>((x2, y2))<br>mydict = &#123;<span class="hljs-string">&#x27;x&#x27;</span>: x, <span class="hljs-string">&#x27;y&#x27;</span>: y&#125;<br>torch.save(mydict, <span class="hljs-string">&#x27;mydict&#x27;</span>)<br>mydict2 = torch.load(<span class="hljs-string">&#x27;mydict&#x27;</span>)<br><span class="hljs-built_in">print</span>(mydict2)<br></code></pre></td></tr></table></figure>
+<h3 id="加载和保存模型参数"><a class="markdownIt-Anchor" href="#加载和保存模型参数"></a> 加载和保存模型参数</h3>
+<ul>
+<li>深度学习框架提供了内置函数来保存和加载整个网络。这将保存模型的参数而不是保存整个模型。</li>
+<li>为了恢复模型，我们需要用代码生成架构，然后从磁盘加载参数。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MLP</span>(nn.Module):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">super</span>().__init__()<br>        <span class="hljs-variable language_">self</span>.hidden = nn.Linear(<span class="hljs-number">20</span>, <span class="hljs-number">256</span>)<br>        <span class="hljs-variable language_">self</span>.output = nn.Linear(<span class="hljs-number">256</span>, <span class="hljs-number">10</span>)<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">self, x</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.output(F.relu(<span class="hljs-variable language_">self</span>.hidden(x)))<br>net = MLP()<br>X = torch.randn(size=(<span class="hljs-number">2</span>, <span class="hljs-number">20</span>))<br><span class="hljs-built_in">print</span>(X)<br>Y = net(X)<br>torch.save(net.state_dict(), <span class="hljs-string">&#x27;mlp.params&#x27;</span>)<br><span class="hljs-comment"># 为了恢复模型，我们实例化了原始多层感知机模型的一个备份。这里我们不需要随机初始化模型参数，而是直接读取文件中存储的参数。</span><br>clone = MLP()<br>clone.load_state_dict(torch.load(<span class="hljs-string">&#x27;mlp.params&#x27;</span>))<br><span class="hljs-built_in">print</span>(clone.<span class="hljs-built_in">eval</span>())<br><span class="hljs-comment"># 输入相同的X的时候结果相同</span><br>Y_clone = clone(X)<br><span class="hljs-built_in">print</span>(Y_clone == Y) <span class="hljs-comment"># tensor([[True, True, True, True, True, True, True, True, True, True],[True, True, True, True, True, True, True, True, True, True]])</span><br><br></code></pre></td></tr></table></figure>
+<h2 id="gpu"><a class="markdownIt-Anchor" href="#gpu"></a> GPU</h2>
+<ul>
+<li><code>nvidia-smi</code>通过这个命令， 可以查看显卡信息。</li>
+</ul>
+<h3 id="计算设备"><a class="markdownIt-Anchor" href="#计算设备"></a> 计算设备</h3>
+<ul>
+<li>
+<p>在PyTorch中，CPU和GPU可以用<code>torch.device('cpu')</code> 和<code>torch.device('cuda')</code>表示。</p>
+<ul>
+<li>cpu设备意味着所有物理CPU和内存，这意味着PyTorch的计算将尝试使用所有CPU核心。</li>
+<li>gpu设备只代表一个卡和相应的显存。如果有多个GPU，我们使用<code>torch.device(f'cuda:&#123;i&#125;')</code> 来表示第<em>i</em>块GPU（<em>i</em>从0开始）。另外，cuda:0和cuda是等价的。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">from</span> torch <span class="hljs-keyword">import</span> nn<br><span class="hljs-built_in">print</span>(torch.device(<span class="hljs-string">&#x27;cpu&#x27;</span>), torch.device(<span class="hljs-string">&#x27;cuda&#x27;</span>), torch.device(<span class="hljs-string">&#x27;cuda:1&#x27;</span>))<br><span class="hljs-comment"># 查询可用gpu的数量</span><br><span class="hljs-built_in">print</span>(torch.cuda.device_count()) <span class="hljs-comment"># 1</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">try_gpu</span>(<span class="hljs-params">i=<span class="hljs-number">0</span></span>): <span class="hljs-comment">#@save</span><br>    <span class="hljs-string">&quot;&quot;&quot;如果存在，则返回gpu(i)，否则返回cpu()&quot;&quot;&quot;</span><br>    <span class="hljs-keyword">if</span> torch.cuda.device_count() &gt;= i + <span class="hljs-number">1</span>:<br>        <span class="hljs-keyword">return</span> torch.device(<span class="hljs-string">f&#x27;cuda:<span class="hljs-subst">&#123;i&#125;</span>&#x27;</span>)<br>    <span class="hljs-keyword">return</span> torch.device(<span class="hljs-string">&#x27;cpu&#x27;</span>)<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">try_all_gpus</span>(): <span class="hljs-comment">#@save</span><br>    <span class="hljs-string">&quot;&quot;&quot;返回所有可用的GPU，如果没有GPU，则返回[cpu(),]&quot;&quot;&quot;</span><br>    devices = [torch.device(<span class="hljs-string">f&#x27;cuda:<span class="hljs-subst">&#123;i&#125;</span>&#x27;</span>)<br>                <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(torch.cuda.device_count())]<br>    <span class="hljs-keyword">return</span> devices <span class="hljs-keyword">if</span> devices <span class="hljs-keyword">else</span> [torch.device(<span class="hljs-string">&#x27;cpu&#x27;</span>)]<br><span class="hljs-built_in">print</span>(try_gpu(), try_gpu(<span class="hljs-number">10</span>), try_all_gpus()) <span class="hljs-comment"># cuda:0 cpu [device(type=&#x27;cuda&#x27;, index=0)]</span><br></code></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="张量与gpu"><a class="markdownIt-Anchor" href="#张量与gpu"></a> 张量与GPU</h3>
+<ul>
+<li>
+<p>默认情况下，张量是在CPU上创建的。需要注意的是，无论何时我们要对多个项进行操作，它们都必须在同一个设备上。</p>
+</li>
+<li>
+<pre class="highlight"><code class="python">X = torch.ones(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, device=try_gpu())
+<span class="hljs-built_in">print</span>(X)
+Y = torch.rand(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, device=try_gpu(<span class="hljs-number">1</span>))
+<span class="hljs-comment"># 可以把X复制到cuda:1 然后在同一个设备上可以将Z和Y相加！</span>
+Z = X.cuda(<span class="hljs-number">1</span>)
+&lt;!--code￼<span class="hljs-number">14</span>--&gt;
+
+</code></pre>
+</li>
+</ul>
+<h2 id="ff的碎碎念"><a class="markdownIt-Anchor" href="#ff的碎碎念"></a> ff的碎碎念！</h2>
+<p>这篇相对内容比较少，大部分都是直接贴的原文www感觉算是更深入了一些内容ovo不过可能过几天就忘啦。</p>
+<p>加油油喵！</p>
+
+    <p>今天大概也在努力吧~o(*￣▽￣*)ブ</p>
+
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>YXF<br>
+        <strong>本文链接：</strong><a href="https://yxf203.github.io/2024/07/19/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%A1%E7%AE%97/" title="https:&#x2F;&#x2F;yxf203.github.io&#x2F;2024&#x2F;07&#x2F;19&#x2F;%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%A1%E7%AE%97&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;yxf203.github.io&#x2F;2024&#x2F;07&#x2F;19&#x2F;%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%A1%E7%AE%97&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E5%8A%A8%E6%89%8B%E5%AD%A6%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">动手学深度学习</a>
+    
+</div>
+  
+  
+    <script async src="/js/copy-codeblock.js?v=1721374717993"></script>
+  
+
+  
+      <div class="nexmoe-post-footer">
+          
+      </div>
+  
+</div></div><div class="nexmoe-post-right">    <div class="nexmoe-fixed">
+        <div class="nexmoe-tool">
+
+            
+
+            
+            
+            <button class="mdui-fab catalog" style="overflow:unset;">
+                <i class="nexmoefont icon-i-catalog"></i>
+                <div class="nexmoe-toc">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%82%E5%92%8C%E5%9D%97"><span class="toc-number">1.</span> <span class="toc-text"> 层和块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E5%9D%97"><span class="toc-number">1.1.</span> <span class="toc-text"> 顺序块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E5%89%8D%E5%90%91%E4%BC%A0%E6%92%AD%E5%87%BD%E6%95%B0%E4%B8%AD%E6%89%A7%E8%A1%8C%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text"> 在前向传播函数中执行代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%88%E7%8E%87"><span class="toc-number">1.3.</span> <span class="toc-text"> 效率</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E7%AE%A1%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text"> 参数管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AE%BF%E9%97%AE"><span class="toc-number">2.1.</span> <span class="toc-text"> 参数访问</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87%E5%8F%82%E6%95%B0"><span class="toc-number">2.1.1.</span> <span class="toc-text"> 目标参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E6%AC%A1%E6%80%A7%E8%AE%BF%E9%97%AE%E6%89%80%E6%9C%89%E5%8F%82%E6%95%B0"><span class="toc-number">2.1.2.</span> <span class="toc-text"> 一次性访问所有参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8E%E5%B5%8C%E5%A5%97%E5%9D%97%E6%94%B6%E9%9B%86%E5%8F%82%E6%95%B0"><span class="toc-number">2.1.3.</span> <span class="toc-text"> 从嵌套块收集参数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">2.2.</span> <span class="toc-text"> 参数初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">2.2.1.</span> <span class="toc-text"> 内置初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">2.2.2.</span> <span class="toc-text"> 自定义初始化</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E7%BB%91%E5%AE%9A"><span class="toc-number">2.3.</span> <span class="toc-text"> 参数绑定</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%B6%E5%90%8E%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">3.</span> <span class="toc-text"> 延后初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%82"><span class="toc-number">4.</span> <span class="toc-text"> 自定义层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%B8%A6%E5%8F%82%E6%95%B0%E7%9A%84%E5%B1%82"><span class="toc-number">4.1.</span> <span class="toc-text"> 不带参数的层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%A6%E5%8F%82%E6%95%B0%E7%9A%84%E5%B1%82"><span class="toc-number">4.2.</span> <span class="toc-text"> 带参数的层</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6"><span class="toc-number">5.</span> <span class="toc-text"> 读写文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E5%92%8C%E4%BF%9D%E5%AD%98%E5%BC%A0%E9%87%8F"><span class="toc-number">5.1.</span> <span class="toc-text"> 加载和保存张量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E5%92%8C%E4%BF%9D%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%8F%82%E6%95%B0"><span class="toc-number">5.2.</span> <span class="toc-text"> 加载和保存模型参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gpu"><span class="toc-number">6.</span> <span class="toc-text"> GPU</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E8%AE%BE%E5%A4%87"><span class="toc-number">6.1.</span> <span class="toc-text"> 计算设备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%A0%E9%87%8F%E4%B8%8Egpu"><span class="toc-number">6.2.</span> <span class="toc-text"> 张量与GPU</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ff%E7%9A%84%E7%A2%8E%E7%A2%8E%E5%BF%B5"><span class="toc-number">7.</span> <span class="toc-text"> ff的碎碎念！</span></a></li></ol>
+                </div>
+            </button>
+            
+
+            
+
+            <a href="#nexmoe-content" class="backtop toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+        </div>
+    </div>
+</div></div><div id="nexmoe-footer"><!--!--></div><div id="nexmoe-search-space"><div class="search-container"><div class="search-header"><div class="search-input-container"><input class="search-input" type="text" placeholder="搜索" onInput="sinput();"></div><a class="search-close" onclick="sclose();">×</a></div><div class="search-body"></div></div></div><div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2058306854838448" crossorigin="anonymous"></script>
+</div></body></html>
